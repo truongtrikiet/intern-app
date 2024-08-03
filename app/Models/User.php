@@ -28,7 +28,7 @@ class User extends Authenticatable
     ];
     //Accessor for 'name'
     public function getNameAttribute() {
-        return "{$this -> first_name} {$this -> last_name}";
+        return "{$this->first_name} {$this->last_name}";
     }
 
     //Get Status
@@ -39,7 +39,7 @@ class User extends Authenticatable
             2 => "denied",
             3 => "locked"
         ];
-        return $status[$this -> status] ?? "Unknown";
+        return $status[$this->status] ?? "Unknown";
     }
 
     /**
