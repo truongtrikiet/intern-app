@@ -20,79 +20,78 @@
                                 </div>
 
 
-                                <form action="/signup" method="post" >
+                                <form action={{route('signup.post')}} method='post' >
                                     @csrf
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label class="form-label">First Name</label>
-                                        <input type="text" class="form-control add-billing-address-input">
+                                        <input type="text" class="form-control add-billing-address-input" name="first_name" required>
                                     </div>
                                 </div>
                                     @if ($errors->any())
-                                    <div>
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
+                                    <div class="alert alert-success" role="alert" style="color: red">
+                                        @foreach($errors->all() as $error)
+                                            <div>{{$error}}</div>
+                                        @endforeach
                                     </div>
                                     @endif
 
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label class="form-label">Last Name</label>
-                                        <input type="text" class="form-control add-billing-address-input">
+                                        <input type="text" class="form-control add-billing-address-input" name="last_name" required>
                                     </div>
                                 </div>
                                     @if ($errors->any())
-                                    <div>
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
+                                    <div class="alert alert-success" role="alert" style="color: red">
+                                        @foreach($errors->all() as $error)
+                                            <div>{{$error}}</div>
+                                        @endforeach
                                     </div>
                                     @endif
 
                                 <div class="col-md-12">
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>
-                                        <input type="email" class="form-control">
+                                        <input type="email" class="form-control" name="email" required>
                                     </div>
                                 </div>
                                     @if ($errors->any())
-                                    <div>
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
+                                    <div class="alert alert-success" role="alert" style="color: red">
+                                        @foreach($errors->all() as $error)
+                                            <div>{{$error}}</div>
+                                        @endforeach
                                     </div>
                                     @endif
 
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label class="form-label">Password</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="password" required>
                                     </div>
                                 </div>
                                     @if ($errors->any())
-                                    <div>
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
+                                    <div class="alert alert-success" role="alert" style="color: red">
+                                        @foreach($errors->all() as $error)
+                                            <div>{{$error}}</div>
+                                        @endforeach
                                     </div>
                                     @endif
-
 
                                     <div class="col-12">
                                         <div class="mb-3">
                                             <label class="form-label">Password Repeat</label>
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="password_confirmation" required>
                                         </div>
                                     </div>
+                                    @if ($errors->any())
+                                    <div class="alert alert-success" role="alert" style="color: red">
+                                        @foreach($errors->all() as $error)
+                                            <div>{{$error}}</div>
+                                        @endforeach
+                                    </div>
+                                    @endif
+
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <div class="form-check form-check-primary form-check-inline">
@@ -103,15 +102,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                </form>
-
-
+                                <!-- </form> -->
 
                                 <div class="col-12">
                                     <div class="mb-4">
-                                        <button class="btn btn-secondary w-100">SIGN UP</button>
+                                        <button class="btn btn-secondary w-100" type="submit" >SIGN UP</button>
                                     </div>
                                 </div>
+                                </form>
+                                
 
                                 <div class="col-12 mb-4">
                                     <div class="">

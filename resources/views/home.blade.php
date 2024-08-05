@@ -10,7 +10,7 @@
     <p>List of Users.</p>
     <ul>
         @foreach ($users as $user)
-        <li>{{$user -> name}}</li>
+            <li>{{$user->name}}</li>
         @endforeach
     </ul>
 </div>

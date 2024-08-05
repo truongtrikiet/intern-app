@@ -18,7 +18,7 @@
 
                                 </div>
 
-                                <form action="{{route('signin')}}" method="post">
+                                <form action="{{route('signin.post')}}" method="post">
                                     @csrf
                                 <div class="col-md-12">
                                     <div class="mb-3">
@@ -51,11 +51,11 @@
 
                                 <div class="col-12">
                                     <div class="mb-4">
-                                        <button class="btn btn-secondary w-100">SIGN IN</button>
+                                        <button class="btn btn-secondary w-100" type="submit" >SIGN IN</button>
                                     </div>
                                 </div>
 
-                                    @if ($errors->any())
+                                    <!-- @if ($errors->any())
                                     <div>
                                         <ul>
                                             @foreach ($errors->all() as $error)
@@ -63,7 +63,7 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                    @endif
+                                    @endif -->
 
                                 <div class="col-12 mb-4">
                                     <div class="">

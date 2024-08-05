@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             'last_name' => 'Kiet',
             'email' => 'trikiet@khgc.com',
             'password' => Hash::make('Kiet2003@'),
-            'address' => 'Hcm City',
+            // 'address' => 'Hcm City', //add after done task
             'status' => '0',
             'role' => 'user',
         ]);
