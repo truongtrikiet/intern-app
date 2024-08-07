@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BlogController;
 use App\Mail\TestMail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Kernel;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\UserStatusMiddleware;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -22,7 +24,7 @@ Route::get('/index2', function () {
 
 
 //test Accessor - Attribute
-Route::get('/', [UserController::class, 'index']);
+Route::get('/home', [UserController::class, 'index']);
 
 //test Trap mail
 // Route::get('/testroute', function() {
@@ -34,19 +36,24 @@ Route::get('/', [UserController::class, 'index']);
 
 
 
-//sign in and sign up
-Route::get('/signin', [AuthController::class, 'signinPage']) -> name('signinPage');
+//sign in and sign up Logout
+Route::get('/', [AuthController::class, 'signinPage']) -> name('signinPage');
 Route::post('/signin', [AuthController::class, 'signin']) -> name('signin.post');
 Route::get('/signup', [AuthController::class, 'signupPage']) -> name('signupPage');
 Route::post('/signup', [AuthController::class, 'signup']) -> name('signup.post');
+Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
+
+Route::middleware(['auth', 'user.status'])->group(function(){
+    Route::get('/blog-app.post', [BlogController::class, 'blogPostPage'])->name('blog-user');
+});
 
 //admin page
-Route::middleware('auth')->group(function(){
-    Route::get('/', function(){
+Route::middleware(['auth', 'admin'])->group(function(){
+    Route::get('/admin', function(){
         if (Auth::user()->role === 'admin'){
             return redirect('/admin');
         }
-        return view('home');
+        return view('index');
     })->name('home');
 
     Route::middleware('admin')->group(function(){
@@ -54,12 +61,22 @@ Route::middleware('auth')->group(function(){
             return view('admin.index');
         })->name('admin.index');
     });
+
+    //edit user
+    Route::get('/user-manage', [UserController::class, 'showUsers'])->name('user.manage');
+    Route::get('/user-manage/{email}/edit', [UserController::class, 'userEdit'])->name('user.edit');
+    Route::post('/user-manage/{email}', [UserController::class, 'userUpdate'])->name('user.update');
 });
 
 
 //manage-page
-Route::get('/user-manage', [UserController::class, 'showUsers'])->name('user.manage');
-
+//BLOG PAGE
 Route::get('/post-manage', function(){
     return view('/admin.post-manage');
 });
+
+Route::get('/post', function(){
+    return view('/blog-app.post');
+});
+
+

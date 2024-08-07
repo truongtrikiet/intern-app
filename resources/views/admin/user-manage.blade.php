@@ -199,9 +199,13 @@
                         </a>
                     </div>
                     <div class="dropdown-item">
-                        <a href={{url('/signin')}}>
+                        <form id="logout" action={{route('logout')}} method="post">
+                            @csrf
+                        </form>
+                        <a href="#" onclick="document.getElementById('logout').submit();">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> <span>Log Out</span>
                         </a>
+                        
                     </div>
                 </div>
 
@@ -450,7 +454,13 @@
                     <!-- /BREADCRUMB -->
     
                     <div class="row layout-top-spacing">
-                    
+                        
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                             <div class="widget-content widget-content-area br-8">
                                 <table id="zero-config" class="table dt-table-hover" style="width:100%">
@@ -471,8 +481,27 @@
                                             <td>{{ $user->last_name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->role}}</td>
-                                            <td>{{ $user->status}}</td>
-                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle table-cancel"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></td>
+                                            <td>
+                                                @switch($user->status)
+                                                    @case(0)
+                                                        Waiting
+                                                        @break
+                                                    @case(1)
+                                                        Approved
+                                                        @break
+                                                    @case(2)
+                                                        Denied
+                                                        @break
+                                                    @case(3)
+                                                        Locked
+                                                        @break
+                                                    @default
+                                                        Unknown
+                                                @endswitch
+                                            </td>
+                                            <td>
+                                                <a href={{route('user.edit', $user->email)}}>Edit</a>
+                                            </td>
                                         </tr>
                                         @endforeach
                                         

@@ -17,4 +17,24 @@ class UserController extends Controller
         $users = User::where('role', 'user')->get();
         return view('admin.user-manage', ['users' => $users]);
     }
+
+    public function userEdit($email) {
+        $user = User::where('email', $email)->firstOrFail();
+        return view('user.edit', ['user' => $user]);
+    }
+    public function userUpdate(Request $request, $email) {
+        $request->validate([
+            'first_name' => 'required|string|max:30',
+            'last_name' => 'required|string|max:30',
+            'status' => 'required|in:0,1,2,3',
+        ]);
+
+        $user = User::where('email', $email)->firstOrFail();
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->status = $request->input('status');
+        $user->save();
+
+        return redirect()->route('user.manage')->with('success', 'Update successfully.');
+    }
 }

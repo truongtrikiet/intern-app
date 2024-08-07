@@ -9,9 +9,9 @@
     </h2>
     <p>List of Users.</p>
     <ul>
-        @foreach ($users as $user)
+        <!-- @foreach ($users as $user)
             <li>{{$user->name}}</li>
-        @endforeach
+        @endforeach -->
     </ul>
 </div>
 </body>

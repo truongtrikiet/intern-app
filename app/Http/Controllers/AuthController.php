@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Enums;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -22,24 +23,28 @@ class AuthController extends Controller
 
     //logic sign in / login
     public function signin(Request $request) {
-        $credentials = $request->validate([
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $users = Auth::user();
-
-            if ($users->role === 'admin') {
-                return redirect()->route('admin.index');
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $user = Auth::user();
+            if ($user->role === 'admin') {
+            return redirect()->route('admin.index');
+            } else {
+                return redirect()->route('blog-user');
             }
-                // abort(404, 'Page not found.');
-                return redirect()->route('home');
+        } else {
+            throw ValidationException::withMessages([
+                'email' => 'Email or password is incorrect',
+            ]);
         }
-        return back()-> withErrors([
-            'email' => 'The email unavailable.',
-            'password' => 'The password was wrong.'
-        ]);
+    }
+
+    public function logout() {
+        Auth::logout();
+        return redirect()->route('signinPage');
     }
 
     //register / sign up

@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
 
-                                    <!-- @if ($errors->any())
+                                    @if ($errors->any())
                                     <div>
                                         <ul>
                                             @foreach ($errors->all() as $error)
@@ -63,7 +63,7 @@
                                             @endforeach
                                         </ul>
                                     </div>
-                                    @endif -->
+                                    @endif
 
                                 <div class="col-12 mb-4">
                                     <div class="">
