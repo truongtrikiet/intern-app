@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserStatusMail;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Mail;
+
 
 class UserController extends Controller
 {
@@ -30,11 +33,18 @@ class UserController extends Controller
         ]);
 
         $user = User::where('email', $email)->firstOrFail();
+        // $previousStatus = $user->status;
+
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->status = $request->input('status');
         $user->save();
 
-        return redirect()->route('user.manage')->with('success', 'Update successfully.');
+        //sent mailhog
+        if ($user->status == 1 ) {
+            // dd($user);
+            Mail::to($user->email)->send(new UserStatusMail($user));
+        }
+        return redirect()->route('user.manage')->with('success', 'User update successfully and email sent if approved.');
     }
 }

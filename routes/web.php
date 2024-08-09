@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
 use App\Mail\TestMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Kernel;
 use App\Http\Middleware\AdminMiddleware;
@@ -26,15 +27,6 @@ Route::get('/index2', function () {
 //test Accessor - Attribute
 Route::get('/home', [UserController::class, 'index']);
 
-//test Trap mail
-// Route::get('/testroute', function() {
-//     $name = "Jaden Code";
-
-//     Mail::to('truongtrikiet1801@gmail.com') -> send(new TestMail($name));
-// });
-
-
-
 
 //sign in and sign up Logout
 Route::get('/', [AuthController::class, 'signinPage']) -> name('signinPage');
@@ -44,7 +36,7 @@ Route::post('/signup', [AuthController::class, 'signup']) -> name('signup.post')
 Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
 
 Route::middleware(['auth', 'user.status'])->group(function(){
-    Route::get('/blog-app.post', [BlogController::class, 'blogPostPage'])->name('blog-user');
+    Route::get('/blog-app.grid', [BlogController::class, 'blogGridPage'])->name('grid-blog');
 });
 
 //admin page
@@ -53,8 +45,8 @@ Route::middleware(['auth', 'admin'])->group(function(){
         if (Auth::user()->role === 'admin'){
             return redirect('/admin');
         }
-        return view('index');
-    })->name('home');
+        return view('blog-app.grid');
+    })->name('blog');
 
     Route::middleware('admin')->group(function(){
         Route::get('/admin', function(){
@@ -69,14 +61,36 @@ Route::middleware(['auth', 'admin'])->group(function(){
 });
 
 
+
 //manage-page
 //BLOG PAGE
 Route::get('/post-manage', function(){
     return view('/admin.post-manage');
 });
 
-Route::get('/post', function(){
+Route::get('/blog-app.post', function(){
     return view('/blog-app.post');
+});
+Route::get('/blog-app.list', function(){
+    return view('/blog-app.list');
+});
+Route::get('/blog-app.create', function(){
+    return view('/blog-app.create');
+});
+Route::get('/blog-app.edit', function(){
+    return view('/blog-app.edit');
 });
 
 
+
+//Test Mail
+// Route::get('/send-test-mail', function(){
+//     Mail::raw('This is a test mail from Laravel to Kiet.', function($message) {
+//         $message->to('kie@gmail.com')->subject('Test Mail');
+//     });
+//     return 'Email sent.';
+// });
+
+Route::get('/mail', function(){
+    return view('mail.user-status');
+});

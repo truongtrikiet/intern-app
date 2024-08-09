@@ -151,7 +151,7 @@
                                 <div class="col-12">
                                     <div class="text-center">
 <!--                                        <p class="mb-0">Already have an account ? <a href="javascript:void(0);" class="text-warning">Sign in</a></p>-->
-                                        <p class="mb-0">Already have an account ? <a href={{url("/signin")}} class="text-warning">Sign in</a></p>
+                                        <p class="mb-0">Already have an account ? <a href={{url("/")}} class="text-warning">Sign in</a></p>
                                     </div>
                                 </div>
 

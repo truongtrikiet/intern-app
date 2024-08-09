@@ -36,19 +36,17 @@ return [
     */
 
     'mailers' => [
-        'mailtrap' => [
-            'transport' => 'mailtrap'
-        ],
-        'smtp' => [
-            'transport' => 'smtp',
-            'url' => env('MAIL_URL'),
-            'host' => env('MAIL_HOST', '127.0.0.1'),
-            'port' => env('MAIL_PORT', 2525),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
-            'timeout' => null,
-            'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
+            'smtp' => [
+                'transport' => 'smtp',
+                // 'url' => env('MAIL_URL'),
+                'host' => env('MAIL_HOST', '127.0.0.1'),
+                'port' => env('MAIL_PORT', 1025),
+                'encryption' => env('MAIL_ENCRYPTION', null),
+                'username' => env('MAIL_USERNAME', null),
+                'password' => env('MAIL_PASSWORD', null),
+                'timeout' => null,
+                'auth_mode' => null,
+                // 'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
         ],
 
         'ses' => [
@@ -111,7 +109,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'superadmin@khgc.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 

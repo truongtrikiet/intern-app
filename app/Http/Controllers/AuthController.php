@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserStatusMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Enums;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -33,7 +35,7 @@ class AuthController extends Controller
             if ($user->role === 'admin') {
             return redirect()->route('admin.index');
             } else {
-                return redirect()->route('blog-user');
+                return redirect()->route('grid-blog');
             }
         } else {
             throw ValidationException::withMessages([
@@ -79,5 +81,19 @@ class AuthController extends Controller
 
         return redirect()->route('signup.post')->with('success', 'Register successfully.');
     }
+
+
+    //Send mail to Mailhog
+    // public function approvedUser($email) {
+    //     $user = User::find($email);
+    //     if ($user) {
+    //         $user->status = 1;
+    //         $user->save();
+
+    //         Mail::to($user->email)->send(new UserStatusMail($user));
+    //         return redirect()->route('/admin')->with('success', 'Your account has been approved.');
+    //     }
+    //     return redirect()->route('/admin')->with('error', 'User not found.');
+    // }
 
 }

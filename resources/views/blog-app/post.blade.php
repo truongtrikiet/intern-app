@@ -280,19 +280,19 @@
                     </a>
                     <ul class="collapse submenu list-unstyled" id="blog" data-bs-parent="#accordionExample">
                         <li>
-                            <a href="./app-blog-grid.html"> Grid </a>
+                            <a href={{url('/blog-app.grid')}}> Grid </a>
                         </li>
                         <li>
-                            <a href="./app-blog-list.html"> List </a>
+                            <a href={{url('/blog-app.list')}}> List </a>
                         </li>
                         <li class="active">
-                            <a href="./app-blog-post.html"> Post </a>
+                            <a href={{url('/blog-app.post')}}> Post </a>
                         </li>
                         <li>
-                            <a href="./app-blog-create.html"> Create </a>
+                            <a href={{url('/blog-app.create')}}> Create </a>
                         </li>
                         <li>
-                            <a href="./app-blog-edit.html"> Edit </a>
+                            <a href={{url('/blog-app.edit')}}> Edit </a>
                         </li>
                     </ul>
                 </li>
