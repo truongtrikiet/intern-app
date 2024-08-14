@@ -178,8 +178,8 @@
                                 &#x1F44B;
                             </div>
                             <div class="media-body">
-                                <h5>Shaun Park</h5>
-                                <p>Project Leader</p>
+                                <h5>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
+                                <p>{{Auth::user()->role}}</p>
                             </div>
                         </div>
                     </div>
@@ -252,8 +252,8 @@
                         <img src="../src/assets/img/profile-30.png" alt="avatar">
                     </div>
                     <div class="profile-content">
-                        <h6 class="">Shaun Park</h6>
-                        <p class="">Project Leader</p>
+                        <h6 class="">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h6>
+                        <p class="">{{Auth::user()->role}}</p>
                     </div>
                 </div>
             </div>
@@ -423,19 +423,19 @@
                     </a>
                     <ul class="collapse submenu list-unstyled" id="blog" data-bs-parent="#accordionExample">
                         <li>
-                            <a href="./app-blog-grid.html"> Grid </a>
+                            <a href={{url('/blog-app.grid')}}> Grid </a>
+                        </li>
+                        <li  class="active">
+                            <a href={{url('/blog-app.list')}}> List </a>
                         </li>
                         <li>
-                            <a href="./app-blog-list.html"> List </a>
+                            <a href={{url('/blog-app.post')}}> Post </a>
                         </li>
                         <li>
-                            <a href="./app-blog-post.html"> Post </a>
+                            <a href={{url('/blog-app.create')}}> Create </a>
                         </li>
                         <li>
-                            <a href="./app-blog-create.html"> Create </a>
-                        </li>
-                        <li>
-                            <a href="./app-blog-edit.html"> Edit </a>
+                            <a href={{url('/blog-app.edit')}}> Edit </a>
                         </li>
                     </ul>
                 </li>

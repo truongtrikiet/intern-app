@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -10,17 +9,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class UserStatusMail extends Mailable
+class TestMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
     /**
      * Create a new message instance.
      */
-    public function __construct($user)
+    public function __construct()
     {
-        $this->user = $user;
+        //
     }
 
     /**
@@ -29,7 +27,7 @@ class UserStatusMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'User Status Mail',
+            subject: 'Test Mail',
         );
     }
 
@@ -39,8 +37,7 @@ class UserStatusMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.user-status',
-            with: ['user' => $this->user],
+            view: 'view.name',
         );
     }
 

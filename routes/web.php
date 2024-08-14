@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\PasswordController;
 use App\Mail\TestMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,14 @@ Route::get('/signup', [AuthController::class, 'signupPage']) -> name('signupPage
 Route::post('/signup', [AuthController::class, 'signup']) -> name('signup.post');
 Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
 
+
+//reset password
+Route::get('/recover-form', [PasswordController::class, 'recoverForm'])->name('recover.page');
+Route::post('/recover', [PasswordController::class, 'recoverMail'])->name('recover.post');
+Route::get('/reset-form/{token} ', [PasswordController::class, 'resetPasswordForm'])->name('reset.page');
+Route::post('/reset-password', [PasswordController::class, 'resetPasswordPost'])->name('reset.password.post');
+
+
 Route::middleware(['auth', 'user.status'])->group(function(){
     Route::get('/blog-app.grid', [BlogController::class, 'blogGridPage'])->name('grid-blog');
 });
@@ -59,6 +68,9 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::get('/user-manage/{email}/edit', [UserController::class, 'userEdit'])->name('user.edit');
     Route::post('/user-manage/{email}', [UserController::class, 'userUpdate'])->name('user.update');
 });
+
+Route::get('/user-profile/{email}', [UserController::class, 'profilePage'])->name('profile.page');
+Route::post('user-profile/{email}/update', [UserController::class, 'profileUpdate'])->name('profile.update');
 
 
 
@@ -86,11 +98,15 @@ Route::get('/blog-app.edit', function(){
 //Test Mail
 // Route::get('/send-test-mail', function(){
 //     Mail::raw('This is a test mail from Laravel to Kiet.', function($message) {
-//         $message->to('kie@gmail.com')->subject('Test Mail');
+//         $message->to('kiet@gmail.com')->subject('Test Mail');
 //     });
 //     return 'Email sent.';
 // });
+// Route::get('/send-test-mail', function(){
+//     Mail::to('kiet@gmail.com')->send(new TestMail());
+//     return 'Email sent.';
+// });
 
-Route::get('/mail', function(){
-    return view('mail.user-status');
-});
+// Route::get('/mail', function(){
+//     return view('mail.user-status');
+// });

@@ -28,13 +28,11 @@
                                         <input type="text" class="form-control add-billing-address-input" name="first_name" required>
                                     </div>
                                 </div>
-                                    @if ($errors->any())
-                                    <div class="alert alert-success" role="alert" style="color: red">
-                                        @foreach($errors->all() as $error)
-                                            <div>{{$error}}</div>
-                                        @endforeach
-                                    </div>
-                                    @endif
+                                    @error('first_name')
+                                        <div class="alert alert-danger">
+                                            <span class="error">{{ $message }}</span>
+                                        </div>
+                                    @enderror
 
                                 <div class="col-md-12">
                                     <div class="mb-3">
@@ -42,13 +40,11 @@
                                         <input type="text" class="form-control add-billing-address-input" name="last_name" required>
                                     </div>
                                 </div>
-                                    @if ($errors->any())
-                                    <div class="alert alert-success" role="alert" style="color: red">
-                                        @foreach($errors->all() as $error)
-                                            <div>{{$error}}</div>
-                                        @endforeach
-                                    </div>
-                                    @endif
+                                    @error('last_name')
+                                        <div class="alert alert-danger">
+                                            <span class="error">{{ $message }}</span>
+                                        </div>
+                                    @enderror
 
                                 <div class="col-md-12">
                                     <div class="mb-3">
@@ -56,41 +52,35 @@
                                         <input type="email" class="form-control" name="email" required>
                                     </div>
                                 </div>
-                                    @if ($errors->any())
-                                    <div class="alert alert-success" role="alert" style="color: red">
-                                        @foreach($errors->all() as $error)
-                                            <div>{{$error}}</div>
-                                        @endforeach
-                                    </div>
-                                    @endif
+                                    @error('email')
+                                        <div class="alert alert-danger">
+                                            <span class="error">{{ $message }}</span>
+                                        </div>
+                                    @enderror
 
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label class="form-label">Password</label>
-                                        <input type="text" class="form-control" name="password" required>
+                                        <input type="password" class="form-control" name="password" required>
                                     </div>
                                 </div>
-                                    @if ($errors->any())
-                                    <div class="alert alert-success" role="alert" style="color: red">
-                                        @foreach($errors->all() as $error)
-                                            <div>{{$error}}</div>
-                                        @endforeach
-                                    </div>
-                                    @endif
+                                    @error('password')
+                                        <div class="alert alert-danger">
+                                            <span class="error">{{ $message }}</span>
+                                        </div>
+                                    @enderror
 
                                     <div class="col-12">
                                         <div class="mb-3">
                                             <label class="form-label">Password Repeat</label>
-                                            <input type="text" class="form-control" name="password_confirmation" required>
+                                            <input type="password" class="form-control" name="password_confirmation" required>
                                         </div>
                                     </div>
-                                    @if ($errors->any())
-                                    <div class="alert alert-success" role="alert" style="color: red">
-                                        @foreach($errors->all() as $error)
-                                            <div>{{$error}}</div>
-                                        @endforeach
-                                    </div>
-                                    @endif
+                                    @error('password_confirmation')
+                                        <div class="alert alert-danger">
+                                            <span class="error">{{ $message }}</span>
+                                        </div>
+                                    @enderror
 
                                 <div class="col-12">
                                     <div class="mb-3">
@@ -102,13 +92,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- </form> -->
-
                                 <div class="col-12">
                                     <div class="mb-4">
                                         <button class="btn btn-secondary w-100" type="submit" >SIGN UP</button>
                                     </div>
                                 </div>
+                                <!-- @if ($errors->any())
+                                    <div class="alert alert-success" role="alert" style="color: red">
+                                        @foreach($errors->all() as $error)
+                                            <div>{{$error}}</div>
+                                        @endforeach
+                                    </div>
+                                    @endif -->
                                 </form>
                                 
 

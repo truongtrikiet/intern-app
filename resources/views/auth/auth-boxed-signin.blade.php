@@ -17,6 +17,11 @@
                                     <p>Enter your email and password to login</p>
 
                                 </div>
+                                @if(session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
 
                                 <form action="{{route('signin.post')}}" method="post">
                                     @csrf
@@ -107,6 +112,7 @@
                                     <div class="text-center">
 <!--                                        <p class="mb-0">Dont't have an account ? <a href="javascript:void(0);" class="text-warning">Sign Up</a></p>-->
                                         <p class="mb-0">Dont't have an account ? <a href={{url("/signup")}} class="text-warning">Sign Up</a></p>
+                                        <p class="mb-0">Forgot password ? <a href={{url('/recover-form')}} class="text-warning">Reset Password</a></p>
                                     </div>
                                 </div>
 

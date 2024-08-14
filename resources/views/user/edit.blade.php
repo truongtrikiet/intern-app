@@ -34,6 +34,10 @@
                         <input type="email" class="form-control" placeholder="Email" name="email" value="{{old('email', $user->email)}}">
                     </div>
                     <div class="input-group mb-3">
+                        <span class="input-group-text" >Address</span>
+                        <input type="text" class="form-control" placeholder="Address" name="address" value="{{old('address', $user->address)}}">
+                    </div>
+                    <div class="input-group mb-3">
                         <span class="input-group-text" >Role</span>
                         <input type="text" class="form-control" placeholder="Role" name="role" value="{{old('role', $user->role)}}">
                     </div>

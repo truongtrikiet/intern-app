@@ -23,6 +23,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'address',
         'status',
         'role',
     ];
@@ -32,16 +33,7 @@ class User extends Authenticatable
         return "{$this->first_name} {$this->last_name}";
     }
 
-    //Get Status
-    // public function getStatusUser() {
-    //     $status = [
-    //         0 => "waiting",
-    //         1 => "approved",
-    //         2 => "denied",
-    //         3 => "locked"
-    //     ];
-    //     return $status[$this->status] ?? "Unknown";
-    // }
+    
     protected $cast = [
         'status' => Status::class,
     ];
@@ -72,11 +64,4 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    
-    // public function isAdmin() {
-    //     return $this -> role === 'admin';
-    // }
-    // public function isUser() {
-    //     return $this -> role === 'user';
-    // }
 }

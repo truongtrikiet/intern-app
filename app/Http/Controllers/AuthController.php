@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Mail\UserStatusMail;
+use App\Mail\WelcomeMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Enums;
+use App\Http\Requests\SignInRequest;
+use App\Http\Requests\SignUpRequest;
+use App\Models\PasswordResetToken;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Mail;
 
@@ -24,18 +28,16 @@ class AuthController extends Controller
     }
 
     //logic sign in / login
-    public function signin(Request $request) {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+    public function signin(SignInRequest $request) {
+        $credentials = $request->only(['email', 'password']);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
+        if (Auth::attempt($credentials)) {
             $user = Auth::user();
             if ($user->role === 'admin') {
             return redirect()->route('admin.index');
             } else {
-                return redirect()->route('grid-blog');
+                $user = Auth::user();
+                return redirect()->route('grid-blog', compact('user'));
             }
         } else {
             throw ValidationException::withMessages([
@@ -54,46 +56,19 @@ class AuthController extends Controller
         return view('auth.auth-boxed-signup');
     }
     //logic sign up
-    public function signup(Request $request) {
-
-        $request->validate([
-            'first_name' => 'required|string|max:30',
-            'last_name' => 'required|string|max:30',
-            'email' => 'required|string|email|max:100|unique:users',
-            // function ($attribute, $value, $fail) {
-            //     if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            //         $fail('Email is invalid.');
-            //     }
-            // },
-            'password' => ['required', 'string', 'min:8', 'regex:/^[a-zA-Z0-9~!@£¢#∞&*]+$/' ,'confirmed'],
-        ]);
+    public function signup(SignUpRequest $request) {
 
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'address' => '(Optional)',
             'status' => 0,
             'role' => 'user',
-
         ]);
-        Auth::login($user);
-
-        return redirect()->route('signup.post')->with('success', 'Register successfully.');
+        
+        Mail::to($user->email)->send(new WelcomeMail($user));
+        return redirect()->route('signinPage')->with('success', 'Register successfully.');
     }
-
-
-    //Send mail to Mailhog
-    // public function approvedUser($email) {
-    //     $user = User::find($email);
-    //     if ($user) {
-    //         $user->status = 1;
-    //         $user->save();
-
-    //         Mail::to($user->email)->send(new UserStatusMail($user));
-    //         return redirect()->route('/admin')->with('success', 'Your account has been approved.');
-    //     }
-    //     return redirect()->route('/admin')->with('error', 'User not found.');
-    // }
-
 }

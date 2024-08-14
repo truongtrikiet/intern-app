@@ -20,6 +20,7 @@ class AdminTableSeeder extends Seeder
             'last_name' => 'Super',
             'email' => 'superadmin@khgc.com',
             'password' => Hash::make('Abcd@1234'),
+            'address' => 'KHGC, Hochiminh City',
             'status' => 1,
             'role' => 'admin',
         ]);

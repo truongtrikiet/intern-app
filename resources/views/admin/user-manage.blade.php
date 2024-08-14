@@ -178,8 +178,8 @@
                                 &#x1F44B;
                             </div>
                             <div class="media-body">
-                                <h5>Shaun Park</h5>
-                                <p>Project Leader</p>
+                                <h5>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
+                                <p>{{Auth::user()->role}}</p>
                             </div>
                         </div>
                     </div>
@@ -250,8 +250,8 @@
                         <img src="../src/assets/img/profile-30.png" alt="avatar">
                     </div>
                     <div class="profile-content">
-                        <h6 class="">Shaun Park</h6>
-                        <p class="">Project Leader</p>
+                        <h6 class="">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h6>
+                        <p class="">{{Auth::user()->role}}</p>
                     </div>
                 </div>
             </div>
@@ -259,7 +259,7 @@
             <div class="shadow-bottom"></div>
             <ul class="list-unstyled menu-categories" id="accordionExample">
                 <li class="menu active">
-                    <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+                    <a href={{url('/user-manage')}} data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             <span>Admin Dashboard</span>
@@ -314,19 +314,19 @@
                     </a>
                     <ul class="collapse submenu list-unstyled" id="blog" data-bs-parent="#accordionExample">
                         <li>
-                            <a href="./app-blog-grid.html"> Grid </a>
+                            <a href={{url('/blog-app.grid')}}> Grid </a>
+                        </li>
+                        <li  class="active">
+                            <a href={{url('/blog-app.list')}}> List </a>
                         </li>
                         <li>
-                            <a href="./app-blog-list.html"> List </a>
+                            <a href={{url('/blog-app.post')}}> Post </a>
                         </li>
                         <li>
-                            <a href="./app-blog-post.html"> Post </a>
+                            <a href={{url('/blog-app.create')}}> Create </a>
                         </li>
                         <li>
-                            <a href="./app-blog-create.html"> Create </a>
-                        </li>
-                        <li>
-                            <a href="./app-blog-edit.html"> Edit </a>
+                            <a href={{url('/blog-app.edit')}}> Edit </a>
                         </li>
                     </ul>
                 </li>
@@ -469,6 +469,7 @@
                                             <th>First Name</th>
                                             <th>Last Name</th>
                                             <th>Email</th>
+                                            <th>Address</th>
                                             <th>Role</th>
                                             <th>Status</th>
                                             <th class="no-content">Action</th>
@@ -480,6 +481,7 @@
                                             <td>{{ $user->first_name }}</td>
                                             <td>{{ $user->last_name }}</td>
                                             <td>{{ $user->email }}</td>
+                                            <td>{{ $user->address }}</td>
                                             <td>{{ $user->role}}</td>
                                             <td>
                                                 @switch($user->status)

@@ -173,8 +173,8 @@
                                 &#x1F44B;
                             </div>
                             <div class="media-body">
-                                <h5>Shaun Park</h5>
-                                <p>Project Leader</p>
+                                <h5>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h5>
+                                <p>{{Auth::user()->role}}</p>
                             </div>
                         </div>
                     </div>
@@ -244,8 +244,8 @@
                         <img src="../src/assets/img/profile-30.png" alt="avatar">
                     </div>
                     <div class="profile-content">
-                        <h6 class="">Shaun Park</h6>
-                        <p class="">Project Leader</p>
+                        <h6 class="">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h6>
+                        <p class="">{{Auth::user()->role}}</p>
                     </div>
                 </div>
             </div>
@@ -314,10 +314,10 @@
                     </a>
                     <ul class="collapse submenu list-unstyled" id="users" data-bs-parent="#accordionExample">
                         <li>
-                            <a href="./user-profile.html"> Profile </a>
-                        </li>
-                        <li>
-                            <a href="./user-account-settings.html"> Account Settings </a>
+                        @php
+                            $user = Auth::user(); // Lấy thông tin user đang đăng nhập
+                        @endphp
+                            <a href={{route('profile.page', ['email' => $user->email])}}> Profile </a>
                         </li>
                     </ul>
                 </li>

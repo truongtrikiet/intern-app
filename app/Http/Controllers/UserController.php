@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Mail\UserStatusMail;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Mail;
+use App\Enums\Status;
 
 
 class UserController extends Controller
@@ -25,26 +28,38 @@ class UserController extends Controller
         $user = User::where('email', $email)->firstOrFail();
         return view('user.edit', ['user' => $user]);
     }
-    public function userUpdate(Request $request, $email) {
-        $request->validate([
-            'first_name' => 'required|string|max:30',
-            'last_name' => 'required|string|max:30',
-            'status' => 'required|in:0,1,2,3',
-        ]);
-
+    public function userUpdate(UserUpdateRequest $request, $email) {
         $user = User::where('email', $email)->firstOrFail();
-        // $previousStatus = $user->status;
 
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
+        $user->address = $request->input('address');
         $user->status = $request->input('status');
         $user->save();
 
         //sent mailhog
-        if ($user->status == 1 ) {
-            // dd($user);
+        if ($user->status == Status::approved->value) {
             Mail::to($user->email)->send(new UserStatusMail($user));
         }
         return redirect()->route('user.manage')->with('success', 'User update successfully and email sent if approved.');
+    }
+
+
+    //User update profile
+    public function profilePage($email) {
+        $user = User::where('email', $email)->firstOrFail();
+        return view('user.user-profile', ['user' => $user]);
+    }
+    public function profileUpdate(ProfileUpdateRequest $request, $email) {
+        
+        $user = User::where('email', $email)->firstOrFail();
+
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->email = $request->input('email');
+        $user->address = $request->input('address');
+        $user->save();
+
+        return redirect()->route('profile.page')->with('success', 'Updated successfully.');
     }
 }
