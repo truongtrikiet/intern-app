@@ -29,18 +29,18 @@
                                     <div class="mb-3">
                                         <label class="form-label">Email</label>
                                         <input type="email" class="form-control" name="email" required>
-                                        @error('email')
-                                        <span class="error">{{ $message }}</span>
-                                        @enderror
+                                        <!-- @error('email')
+                                            <span class="alert alert-danger">{{ $message }}</span>
+                                        @enderror -->
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-4">
                                         <label class="form-label">Password</label>
                                         <input type="password" class="form-control" name="password" required>
-                                        @error('password')
-                                        <span class="error">{{ $message }}</span>
-                                        @enderror
+                                        <!-- @error('password')
+                                            <span class="alert alert-danger">{{ $message }}</span>
+                                        @enderror -->
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -61,12 +61,10 @@
                                 </div>
 
                                     @if ($errors->any())
-                                    <div>
-                                        <ul>
+                                    <div class="alert alert-danger">
                                             @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
+                                                <p>{{ $error }}</p>
                                             @endforeach
-                                        </ul>
                                     </div>
                                     @endif
 

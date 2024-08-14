@@ -22,16 +22,9 @@ class ProfileUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'string|max:30',
-            'last_name' => 'string|max:20',
-            'email' => 'email',
-            'address' => 'string',
-        ];
-    }
-
-    public function messages() {
-        return [
-            'email.email' => 'Invalid email address',
+            'first_name' => 'required|string|max:30',
+            'last_name' => 'required|string|max:20',
+            'address' => 'required|string|max:200',
         ];
     }
 }

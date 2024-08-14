@@ -66,10 +66,6 @@ class PasswordController extends Controller
             return redirect()->route('reset.page', ['token' => $request->token])->with('error', 'Invalid.');
         }
 
-        // if ($request->input('new_password') !== $request->input('re_new_password')) {
-        //     return redirect()->back()->withErrors(['new_password' => 'The new password does not match, please try again.']);
-        // }
-
         $user = User::where('email', $request->email)->first();
         $user->password = Hash::make($request->input('password'));
         $user->save();
