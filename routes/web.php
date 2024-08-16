@@ -41,7 +41,7 @@ Route::post('/reset-password', [PasswordController::class, 'resetPasswordPost'])
 
 
 Route::middleware(['auth', 'user.status'])->group(function(){
-    Route::get('/blog-app.grid', [BlogController::class, 'gridBlog'])->name('grid-blog');
+    Route::get('/blog-app.grid', [BlogController::class, 'index'])->name('blog.index');
 });
 
 //admin page //ADMIN CONTROLLER
@@ -50,7 +50,7 @@ Route::middleware(['auth', 'admin'])->group(function(){
         if (Auth::user()->role === 'admin'){
             return redirect('/admin');
         }
-        return view('blog-app.grid');
+        return view('blog-app.list');
     })->name('blog');
 
     Route::middleware('admin')->group(function(){
@@ -63,6 +63,10 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::get('/user-manage', [AdminController::class, 'showUsers'])->name('user.manage');
     Route::get('/user-manage/{email}/edit', [AdminController::class, 'userEdit'])->name('user.edit');
     Route::post('/user-manage/{email}', [AdminController::class, 'userUpdate'])->name('user.update');
+
+    //blog manage
+    Route::get('/blog-manage', [AdminController::class, 'manageBlog'])->name('admin.blog.manage');
+    Route::post('/blog-manage/{$id}', [AdminController::class, 'updateBlogStatus'])->name('admin.blog.update');
 });
 
 
@@ -74,24 +78,21 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/profile/{email}/update', [UserController::class, 'profileUpdate'])->name('profile.update');
 });
 
-
-
 //manage-page
 //BLOG PAGE
-Route::get('/post-manage', function(){
-    return view('/admin.post-manage');
+Route::middleware('auth')->group(function () {
+    // Route::resource('blogs', BlogController::class);
+    // Route::resource('blog', BlogController::class);
+
+    Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+    Route::get('/blog/list', [BlogController::class, 'list'])->name('blog.list');
+    Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
+    Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
+    Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
+    Route::get('/blog/{id}/edit', [BlogController::class, 'edit'])->name('blog.edit');
+    Route::put('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
+    Route::delete('/blog/{blog}', [BlogController::class, 'destroy'])->name('blog.destroy');
+
 });
 
-Route::get('/blog-app.post', function(){
-    return view('/blog-app.post');
-});
-Route::get('/blog-app.list', function(){
-    return view('/blog-app.list');
-});
-Route::get('/blog-app.create', function(){
-    return view('/blog-app.create');
-});
-Route::get('/blog-app.edit', function(){
-    return view('/blog-app.edit');
-});
 

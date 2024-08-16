@@ -28,6 +28,10 @@ class User extends Authenticatable
         'role',
     ];
 
+    public function blogs() {
+        return $this->hasMany(Blog::class, 'user_email', 'email');
+    }
+
     //Accessor for 'name'
     public function getNameAttribute() {
         return "{$this->first_name} {$this->last_name}";

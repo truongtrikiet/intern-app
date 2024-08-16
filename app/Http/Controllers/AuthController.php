@@ -37,7 +37,7 @@ class AuthController extends Controller
             return redirect()->route('admin.index');
             } else {
                 $user = Auth::user();
-                return redirect()->route('grid-blog', compact('user'));
+                return redirect()->route('blog.index', compact('user'));
             }
         } else {
             throw ValidationException::withMessages([

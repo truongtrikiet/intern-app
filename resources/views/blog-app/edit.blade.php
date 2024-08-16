@@ -347,74 +347,48 @@
         </div>
         <!-- /BREADCRUMB -->
 
+        <hr>
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
         <div class="row mb-4 layout-spacing layout-top-spacing">
 
             <div class="col-xxl-9 col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
+            <form action={{ route('blog.update', ['id' => $blog->id]) }} method="post">
+                @csrf
                 <div class="widget-content widget-content-area blog-create-section">
-
                     <div class="row mb-4">
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="post-title" placeholder="Post Title" value="Elegant and useful Admin Templates">
+                            <label>Title</label>
+                            <div id="blog-description"></div>
                         </div>
                     </div>
-
                     <div class="row mb-4">
                         <div class="col-sm-12">
-                            <label>Content</label>
-                            <div id="blog-description">
-                                Aliquam leo elit, semper sed diam non, efficitur semper mi. Sed pulvinar velit massa, nec ornare arcu laoreet non. Quisque dignissim lectus eget lectus pulvinar imperdiet. Aliquam dictum porttitor laoreet. Duis ac tortor non sem vestibulum interdum in quis dui. Pellentesque nec augue eleifend, convallis tortor ac, posuere turpis. Nulla commodo euismod felis vitae eleifend. Morbi cursus maximus mauris ac lacinia. Nullam tellus dolor, sodales vitae nunc id, luctus lacinia leo. Sed id urna venenatis lacus lobortis ullamcorper nec dignissim odio.
-                            </div>
+                            <input type="text" name="title" class="form-control" id="post-title" placeholder="Post Title" value="{{old('title', $blog->title)}}">
                         </div>
                     </div>
-
                 </div>
 
                 <div class="widget-content widget-content-area blog-create-section mt-4">
-
-                    <h5 class="mb-4">SEO Settings</h5>
-                    
+                    <h5 class="mb-4">Description</h5>
                     <div class="row mb-4">
                         <div class="col-xxl-12 mb-4">
-                            <input type="text" class="form-control" id="post-meta-title" placeholder="Post Title" value="Elegant and useful Admin Templates">
+                            <input type="text" name="description" class="form-control" id="post-meta-title" placeholder="Description" value="{{old('description', $blog->description)}}">
                         </div>
-                        <div class="col-xxl-12">
-                            <label for="post-meta-description">Meta Description</label>
-                            <textarea name="post-meta-description" class="form-control" id="post-meta-description" cols="10" rows="5">Perspiciatis maxime facilis velit tenetur, iste expedita in dignissimos iure aut excepturi sapiente eligendi repellat. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut blanditiis assumenda doloremque fugiat minima tempora!</textarea>
+                        <div class="col-xxl-12" id="editor">
+                            <h5 for="post-meta-description">Content</h5>
+                            <textarea name="content" class="form-control" id="post-meta-description" cols="10" rows="5" placeholder="Content" value="{{old('content', $blog->content)}}"></textarea>
                         </div>
                     </div>
 
-                </div>
-                
-            </div>
-
-            <div class="col-xxl-3 col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-xxl-0 mt-4">
-                <div class="widget-content widget-content-area blog-create-section">
-                    <div class="row">
-                        <div class="col-xxl-12 mb-4">
-                            <div class="switch form-switch-custom switch-inline form-switch-primary">
-                                <input class="switch-input" type="checkbox" role="switch" id="showPublicly" checked>
-                                <label class="switch-label" for="showPublicly">Publish</label>
-                            </div>
-                        </div>
-                        <div class="col-xxl-12 mb-4">
-                            <div class="switch form-switch-custom switch-inline form-switch-primary">
-                                <input class="switch-input" type="checkbox" role="switch" id="enableComment" checked>
-                                <label class="switch-label" for="enableComment">Enable Comments</label>
-                            </div>
-                        </div>
-                        <div class="col-xxl-12 col-md-12 mb-4">
-                            <label for="tags">Tags</label>
-                            <input id="tags" class="blog-tags" value="Admin, Themeforest, Bootstrap">
-                        </div>
-                        <div class="col-xxl-12 col-md-12 mb-4">
-                            <label for="category">Category</label>
-                            <input id="category" name="category" value="Themeforest, Cork Admin, Dashboard, Vue, Laravel" placeholder="Choose...">
-                        </div>
-                        <div class="col-xxl-12 col-md-12 mb-4">
-                            <label for="product-images">Featured Image</label>
-                            <div class="multiple-file-upload">
-                                <input type="file" 
+                    <!-- <div class="col-xxl-12 col-md-12 mb-4">
+                        <label for="product-images">Featured Image</label>
+                        <div class="multiple-file-upload">
+                            <input type="file" 
                                     class="filepond file-upload-multiple"
                                     name="filepond"
                                     id="product-images" 
@@ -422,16 +396,19 @@
                                     data-allow-reorder="true"
                                     data-max-file-size="3MB"
                                     data-max-files="5">
-                            </div>
                         </div>
-                        <div class="col-xxl-12 col-sm-4 col-12 mx-auto">
-                            <button class="btn btn-success w-100">Update Post</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    </div> -->
 
-        </div>
+                    <div class="col-xxl-12 col-sm-4 col-12 mx-auto">
+                        <button class="btn btn-success w-100" type="submit">Save</button>
+                    </div>
+
+                    </form>
+
+                </div>
+                
+                
+            </div>
 
     </div>
     

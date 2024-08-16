@@ -22,6 +22,7 @@
 
     <link href={{asset('src/assets/css/dark/elements/custom-pagination.css')}} rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href={{asset('src/assets/css/dark/apps/blog-post.css')}}>
+    <link href={{asset('src/assets/js/blogs/delete.css')}} rel="stylesheet">
     <!--  END CUSTOM STYLE FILE  -->
 </head>
 <body class="layout-boxed">
@@ -42,6 +43,8 @@
     <script src={{asset('src/plugins/src/waves/waves.min.js')}}></script>
     <script src={{asset('layouts/modern-light-menu/app.js')}}></script>
     <script src={{asset('src/plugins/src/highlight/highlight.pack.js')}}></script>
+    <script src={{asset("src/assets/js/quill/Quill.js")}}></script>
+    <script src={{asset("src/assets/js/blogs/delete.js")}}></script>
     <!-- END GLOBAL MANDATORY STYLES -->
 
     <!-- BEGIN PAGE LEVEL SCRIPTS -->

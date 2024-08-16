@@ -17,7 +17,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x search-close"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </div>
             </form>
-            <span class="badge badge-secondary">Admin Dashboard.</span>
+            <span class="badge badge-secondary">Menu</span>
         </div>
 
         <ul class="navbar-item flex-row ms-lg-auto ms-0">
@@ -223,12 +223,12 @@
             <div class="navbar-nav theme-brand flex-row  text-center">
                 <div class="nav-logo">
                     <div class="nav-item theme-logo">
-                        <a href={{asset('views.index')}}>
+                        <a href={{asset('blog-app.index')}}>
                             <img src="../src/assets/img/logo.svg" class="navbar-logo" alt="logo">
                         </a>
                     </div>
                     <div class="nav-item theme-text">
-                        <a href={{asset('views.index')}} class="nav-link"> CORK </a>
+                        <a href={{asset('blog-app.index')}} class="nav-link"> CORK </a>
                     </div>
                 </div>
                 <div class="nav-item sidebar-toggle">
@@ -258,14 +258,14 @@
                 </li>
 
 
-                <li class="menu">
+                <!-- <li class="menu">
                     <a href="./app-contacts.html" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                             <span>Contacts</span>
                         </div>
                     </a>
-                </li>
+                </li> -->
 
                
                 <li class="menu">
@@ -280,20 +280,20 @@
                     </a>
                     <ul class="collapse submenu list-unstyled" id="blog" data-bs-parent="#accordionExample">
                         <li class="active">
-                            <a href={{url('/blog-app.grid')}}> Grid </a>
+                            <a href={{url('/blog-app.grid')}}> Home </a>
                         </li>
                         <li>
-                            <a href={{url('/blog-app.list')}}> List </a>
+                            <a href={{url('/blog/list')}}> List </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href={{url('/blog-app.post')}}> Post </a>
-                        </li>
+                        </li> -->
                         <li>
-                            <a href={{url('/blog-app.create')}}> Create </a>
+                            <a href={{url('/blog/create')}}> Create </a>
                         </li>
-                        <li>
-                            <a href={{url('/blog-app.edit')}}> Edit </a>
-                        </li>
+                        <!-- <li>
+                            <a href={{url('/blog/{id}/edit')}}> Edit </a>
+                        </li> -->
                     </ul>
                 </li>
 
@@ -312,10 +312,12 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                         </div>
                     </a>
+
+                    <!-- Profile by user -->
                     <ul class="collapse submenu list-unstyled" id="users" data-bs-parent="#accordionExample">
                         <li>
                         @php
-                            $user = Auth::user(); // Lấy thông tin user đang đăng nhập
+                            $user = Auth::user();
                         @endphp
                             <a href={{route('profile.page', ['email' => $user->email])}}> Profile </a>
                         </li>
@@ -368,26 +370,36 @@
                 </select>
             </div>
         </div>
-        
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="row">
 
-            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
-                <a href="./app-blog-post.html" class="card style-2 mb-md-0 mb-4">
+        @foreach ($blogs as $blog)
+        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
+                <a href={{route('blog.show', $blog->id)}} class="card style-2 mb-md-0 mb-4">
                     <img src="../src/assets/img/grid-blog-style-2.jpeg" class="card-img-top" alt="...">
                     <div class="card-body px-0 pb-0">
-                        <h5 class="card-title mb-3">14 Tips to improve your photography</h5>
+                        <h5 class="card-title mb-3">{{ $blog->title }}</h5>
                         <div class="media mt-4 mb-0 pt-1">
                             <img src="../src/assets/img/profile-5.jpeg" class="card-media-image me-3" alt="">
                             <div class="media-body">
-                                <h4 class="media-heading mb-1">Shaun Park</h4>
-                                <p class="media-text">01 May</p>
+                                <h4 class="media-heading mb-1">{{ $blog->user->first_name }} {{ $blog->user->last_name }}</h4>
+                                <p class="media-text">{{ $blog->publish_date }}</p>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
+        @endforeach
+            
+           
 
-            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
+            <!-- <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
                 <a href="./app-blog-post.html" class="card style-2 mb-md-0 mb-4">
                     <img src="../src/assets/img/grid-blog-style-1.jpg" class="card-img-top" alt="...">
                     <div class="card-body px-0 pb-0">
@@ -401,9 +413,9 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> -->
 
-            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
+            <!-- <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
                 <a href="./app-blog-post.html" class="card style-2 mb-md-0 mb-4">
                     <img src="../src/assets/img/grid-blog-style-3.jpg" class="card-img-top" alt="...">
                     <div class="card-body px-0 pb-0">
@@ -417,9 +429,9 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> -->
 
-            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
+            <!-- <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
                 <a href="./app-blog-post.html" class="card style-2 mb-md-0 mb-4">
                     <img src="../src/assets/img/list-blog-style-3.jpeg" class="card-img-top" alt="...">
                     <div class="card-body px-0 pb-0">
@@ -433,9 +445,9 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> -->
 
-            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
+            <!-- <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
                 <a href="./app-blog-post.html" class="card style-2 mb-md-0 mb-4">
                     <img src="../src/assets/img/grid-blog-style-5.jpg" class="card-img-top" alt="...">
                     <div class="card-body px-0 pb-0">
@@ -449,9 +461,9 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> -->
 
-            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
+            <!-- <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
                 <a href="./app-blog-post.html" class="card style-2 mb-md-0 mb-4">
                     <img src="../src/assets/img/masonry-blog-style-3.jpeg" class="card-img-top" alt="...">
                     <div class="card-body px-0 pb-0">
@@ -465,9 +477,9 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> -->
 
-            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
+            <!-- <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
                 <a href="./app-blog-post.html" class="card style-2 mb-md-0 mb-4">
                     <img src="../src/assets/img/grid-blog-style-4.jpg" class="card-img-top" alt="...">
                     <div class="card-body px-0 pb-0">
@@ -481,9 +493,9 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> -->
 
-            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
+            <!-- <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
                 <a href="./app-blog-post.html" class="card style-2 mb-md-0 mb-4">
                     <img src="../src/assets/img/masonry-blog-style-4.jpeg" class="card-img-top" alt="...">
                     <div class="card-body px-0 pb-0">
@@ -497,7 +509,7 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> -->
 
         </div>
 

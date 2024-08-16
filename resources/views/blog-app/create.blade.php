@@ -258,14 +258,14 @@
                 </li>
 
 
-                <li class="menu">
+                <!-- <li class="menu">
                     <a href="./app-contacts.html" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                             <span>Contacts</span>
                         </div>
                     </a>
-                </li>
+                </li> -->
 
                
                 <li class="menu">
@@ -280,20 +280,20 @@
                     </a>
                     <ul class="collapse submenu list-unstyled" id="blog" data-bs-parent="#accordionExample">
                         <li>
-                            <a href={{url('/blog-app.grid')}}> Grid </a>
+                            <a href={{url('/blog-app.grid')}}> Home </a>
                         </li>
                         <li>
-                            <a href={{url('/blog-app.list')}}> List </a>
+                            <a href={{url('/blog/list')}}> List </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href={{url('/blog-app.post')}}> Post </a>
-                        </li>
+                        </li> -->
                         <li  class="active">
                             <a href={{url('/blog-app.create')}}> Create </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href={{url('/blog-app.edit')}}> Edit </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
 
@@ -339,53 +339,76 @@
             <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">App</a></li>
-                    <li class="breadcrumb-item"><a href="#">Blog</a></li>
+                    <li class="breadcrumb-item"><a href={{url('/blog-app.grid')}}>Blog</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Create</li>
                 </ol>
             </nav>
         </div>
         <!-- /BREADCRUMB -->
-
+        <hr>
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
         <div class="row mb-4 layout-spacing layout-top-spacing">
 
             <div class="col-xxl-9 col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
+            <form action={{ route('blog.store') }} method="post">
+                @csrf
                 <div class="widget-content widget-content-area blog-create-section">
-
                     <div class="row mb-4">
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="post-title" placeholder="Post Title">
-                        </div>
-                    </div>
-
-                    <div class="row mb-4">
-                        <div class="col-sm-12">
-                            <label>Content</label>
+                            <label>Title</label>
                             <div id="blog-description"></div>
                         </div>
                     </div>
-
+                    <div class="row mb-4">
+                        <div class="col-sm-12">
+                            <input type="text" name="title" class="form-control" id="post-title" placeholder="Post Title" required>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="widget-content widget-content-area blog-create-section mt-4">
-
-                    <h5 class="mb-4">SEO Settings</h5>
-                    
+                    <h5 class="mb-4">Description</h5>
                     <div class="row mb-4">
                         <div class="col-xxl-12 mb-4">
-                            <input type="text" class="form-control" id="post-meta-title" placeholder="Meta Title">
+                            <input type="text" name="description" class="form-control" id="post-meta-title" placeholder="Description" required>
                         </div>
-                        <div class="col-xxl-12">
-                            <label for="post-meta-description">Meta Description</label>
-                            <textarea name="post-meta-description" class="form-control" id="post-meta-description" cols="10" rows="5"></textarea>
+                        <div class="col-xxl-12" id="editor">
+                            <h5 for="post-meta-description">Content</h5>
+                            <textarea name="content" class="form-control" id="post-meta-description" cols="10" rows="5" placeholder="Content"></textarea>
                         </div>
                     </div>
 
+                    <!-- <div class="col-xxl-12 col-md-12 mb-4">
+                        <label for="product-images">Featured Image</label>
+                        <div class="multiple-file-upload">
+                            <input type="file" 
+                                    class="filepond file-upload-multiple"
+                                    name="filepond"
+                                    id="product-images" 
+                                    multiple 
+                                    data-allow-reorder="true"
+                                    data-max-file-size="3MB"
+                                    data-max-files="5">
+                        </div>
+                    </div> -->
+
+                    <div class="col-xxl-12 col-sm-4 col-12 mx-auto">
+                        <button class="btn btn-success w-100" type="submit">Create Post</button>
+                    </div>
+
+                    </form>
+
                 </div>
+                
                 
             </div>
 
-            <div class="col-xxl-3 col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-xxl-0 mt-4">
+            <!-- <div class="col-xxl-3 col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-xxl-0 mt-4">
                 <div class="widget-content widget-content-area blog-create-section">
                     <div class="row">
                         <div class="col-xxl-12 mb-4">
@@ -409,30 +432,13 @@
                             <label for="category">Category</label>
                             <input id="category" name="category" placeholder="Choose...">
                         </div>
-
-                        <div class="col-xxl-12 col-md-12 mb-4">
-
-                            <label for="product-images">Featured Image</label>
-                            <div class="multiple-file-upload">
-                                <input type="file" 
-                                    class="filepond file-upload-multiple"
-                                    name="filepond"
-                                    id="product-images" 
-                                    multiple 
-                                    data-allow-reorder="true"
-                                    data-max-file-size="3MB"
-                                    data-max-files="5">
-                            </div>
-
-                        </div>
-
                         <div class="col-xxl-12 col-sm-4 col-12 mx-auto">
                             <button class="btn btn-success w-100">Create Post</button>
                         </div>
-                        
+                    
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </div>
         

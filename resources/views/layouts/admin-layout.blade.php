@@ -39,6 +39,7 @@
 <script src={{asset("src/plugins/src/mousetrap/mousetrap.min.js")}}></script>
 <script src={{asset("src/plugins/src/waves/waves.min.js")}}></script>
 <script src={{asset("modern-light-menu/app.js")}}></script>
+<script src={{asset("src/assets/js/quill/Quill.js")}}></script>
 <!-- END GLOBAL MANDATORY SCRIPTS -->
 
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->

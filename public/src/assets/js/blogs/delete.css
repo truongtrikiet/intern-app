@@ -1,0 +1,60 @@
+/* Styles for modal background */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Background with opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure modal is on top */
+    visibility: hidden; /* Hidden by default */
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Styles for modal content */
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px; /* Width of the modal */
+    text-align: center;
+    position: relative;
+}
+
+/* Close button styles */
+/* .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+} */
+
+/* Button styles */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+} 
+
+/* .btn-danger {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #bdc3c7;
+    color: #fff;
+} */
+
+/* Display the modal when active */
+.modal.show {
+    visibility: visible;
+    opacity: 1;
+}

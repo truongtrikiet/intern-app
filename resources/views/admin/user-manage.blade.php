@@ -282,7 +282,7 @@
                             <a href={{url('/user-manage')}}> Users Manage </a>
                         </li>
                         <li>
-                            <a href={{url('/post-manage')}}> Posts Manage </a>
+                            <a href={{url('/blog-manage')}}> Blogs Manage </a>
                         </li>
                     </ul>
                 </li>

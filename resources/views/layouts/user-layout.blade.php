@@ -40,12 +40,12 @@
     <link href={{asset('src/assets/css/dark/components/tabs.css')}} rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href={{asset('src/assets/css/dark/elements/alert.css')}}>
     
-    <link href="../src/plugins/css/dark/sweetalerts2/custom-sweetalert.css" rel="stylesheet" type="text/css" />
-    <link href="../src/plugins/css/dark/notification/snackbar/custom-snackbar.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../src/assets/css/dark/forms/switches.css">
-    <link href="../src/assets/css/dark/components/list-group.css" rel="stylesheet" type="text/css">
+    <link href={{asset('src/plugins/css/dark/sweetalerts2/custom-sweetalert.css')}} rel="stylesheet" type="text/css" />
+    <link href={{asset('src/plugins/css/dark/notification/snackbar/custom-snackbar.css')}} rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href={{asset('src/assets/css/dark/forms/switches.css')}}>
+    <link href={{asset('src/assets/css/dark/components/list-group.css')}} rel="stylesheet" type="text/css">
 
-    <link href="../src/assets/css/dark/users/account-setting.css" rel="stylesheet" type="text/css" />
+    <link href={{asset('src/assets/css/dark/users/account-setting.css')}} rel="stylesheet" type="text/css" />
 
 
     <!--  END CUSTOM STYLE FILE  -->
@@ -72,25 +72,26 @@
     <!-- END MAIN CONTAINER -->
 
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-    <script src="../src/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="../src/plugins/src/mousetrap/mousetrap.min.js"></script>
-    <script src="../src/plugins/src/waves/waves.min.js"></script>
-    <script src="../layouts/modern-light-menu/app.js"></script>
+    <script src={{asset('src/bootstrap/js/bootstrap.bundle.min.js')}}></script>
+    <script src={{asset('src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js')}}></script>
+    <script src={{asset('src/plugins/src/mousetrap/mousetrap.min.js')}}></script>
+    <script src={{asset('src/plugins/src/waves/waves.min.js')}}></script>
+    <script src={{asset('layouts/modern-light-menu/app.js')}}></script>
+    <script src={{asset("src/assets/js/quill/Quill.js")}}></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
 
     <!--  BEGIN CUSTOM SCRIPTS FILE  -->
-    <script src="../src/plugins/src/filepond/filepond.min.js"></script>
-    <script src="../src/plugins/src/filepond/FilePondPluginFileValidateType.min.js"></script>
-    <script src="../src/plugins/src/filepond/FilePondPluginImageExifOrientation.min.js"></script>
-    <script src="../src/plugins/src/filepond/FilePondPluginImagePreview.min.js"></script>
-    <script src="../src/plugins/src/filepond/FilePondPluginImageCrop.min.js"></script>
-    <script src="../src/plugins/src/filepond/FilePondPluginImageResize.min.js"></script>
-    <script src="../src/plugins/src/filepond/FilePondPluginImageTransform.min.js"></script>
-    <script src="../src/plugins/src/filepond/filepondPluginFileValidateSize.min.js"></script>
-    <script src="../src/plugins/src/notification/snackbar/snackbar.min.js"></script>
-    <script src="../src/plugins/src/sweetalerts2/sweetalerts2.min.js"></script>
-    <script src="../src/assets/js/users/account-settings.js"></script>
+    <script src={{asset('src/plugins/src/filepond/filepond.min.js')}}></script>
+    <script src={{asset('src/plugins/src/filepond/FilePondPluginFileValidateType.min.js')}}></script>
+    <script src={{asset('src/plugins/src/filepond/FilePondPluginImageExifOrientation.min.js')}}></script>
+    <script src={{asset('src/plugins/src/filepond/FilePondPluginImagePreview.min.js')}}></script>
+    <script src={{asset('src/plugins/src/filepond/FilePondPluginImageCrop.min.js')}}></script>
+    <script src={{asset('src/plugins/src/filepond/FilePondPluginImageResize.min.js')}}></script>
+    <script src={{asset('src/plugins/src/filepond/FilePondPluginImageTransform.min.js')}}></script>
+    <script src={{asset('src/plugins/src/filepond/filepondPluginFileValidateSize.min.js')}}></script>
+    <script src={{asset('src/plugins/src/notification/snackbar/snackbar.min.js')}}></script>
+    <script src={{asset('src/plugins/src/sweetalerts2/sweetalerts2.min.js')}}></script>
+    <script src={{asset('src/assets/js/users/account-settings.js')}}></script>
     <!--  END CUSTOM SCRIPTS FILE  -->
 </body>
 </html>

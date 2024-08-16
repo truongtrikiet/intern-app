@@ -7,7 +7,11 @@ use App\Models\User;
 use App\Enums\Status;
 use App\Http\Requests\UserUpdateRequest;
 use App\Mail\UserStatusMail;
+use Database\Seeders\BlogSeeder;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rules\Enum;
+use App\Enums\BlogStatus;
+use App\Models\Blog;
 
 
 class AdminController extends Controller
@@ -40,6 +44,23 @@ class AdminController extends Controller
             Mail::to($user->email)->send(new UserStatusMail($user));
         }
         return redirect()->route('user.manage')->with('success', 'User update successfully and email sent if approved.');
+    }
+
+
+    //Blog Manage
+    public function manageBlog() {
+        $blogs = Blog::all();
+        return view('admin.blog-manage', ['blogs' => $blogs]);
+    }
+    public function updateBlogStatus(Request $request, Blog $blog) {
+        $request->validate([
+            'status_blog' => ['required', new Enum(BlogStatus::class)],
+        ]);
+        $blog->update([
+            'status_blog' => $request->input('status_blog')
+        ]);
+
+        return redirect()->route('admin.blog.manage')->with('success', 'Blog status updated successfully.');
     }
 
 }

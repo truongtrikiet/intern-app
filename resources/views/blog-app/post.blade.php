@@ -279,21 +279,21 @@
                         </div>
                     </a>
                     <ul class="collapse submenu list-unstyled" id="blog" data-bs-parent="#accordionExample">
-                        <li>
-                            <a href={{url('/blog-app.grid')}}> Grid </a>
-                        </li>
-                        <li>
-                            <a href={{url('/blog-app.list')}}> List </a>
-                        </li>
                         <li class="active">
+                            <a href={{url('/blog-app.grid')}}> Home </a>
+                        </li>
+                        <li>
+                            <a href={{url('/blog/list')}}> List </a>
+                        </li>
+                        <!-- <li>
                             <a href={{url('/blog-app.post')}}> Post </a>
-                        </li>
+                        </li> -->
                         <li>
-                            <a href={{url('/blog-app.create')}}> Create </a>
+                            <a href={{url('/blog/create')}}> Create </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href={{url('/blog-app.edit')}}> Edit </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
 
@@ -388,7 +388,7 @@
 
                                 <div class="post-content">
 
-                                    <p class="mb-5">Aenean non tempor justo. Donec faucibus sapien a urna interdum porta. Quisque fermentum nisi felis, quis aliquam quam volutpat porta. Nullam aliquet scelerisque massa, quis tincidunt velit. Vivamus semper placerat ornare. Maecenas eget accumsan eros. Donec non felis vitae tortor elementum euismod sit amet vitae risus. Nam nunc turpis, porttitor ut tempor eu, efficitur nec risus.</p>
+                                    <!-- <p class="mb-5">Aenean non tempor justo. Donec faucibus sapien a urna interdum porta. Quisque fermentum nisi felis, quis aliquam quam volutpat porta. Nullam aliquet scelerisque massa, quis tincidunt velit. Vivamus semper placerat ornare. Maecenas eget accumsan eros. Donec non felis vitae tortor elementum euismod sit amet vitae risus. Nam nunc turpis, porttitor ut tempor eu, efficitur nec risus.</p>
 
                                     <h4>Cinyras ea tulit in inducit qui mater</h4>
 
@@ -402,74 +402,16 @@
                                         <li class="mb-1">Consectetur adipiscing elit</li>
                                         <li class="mb-1">Integer massa</li>
                                         <li class="mb-1">Facilisis nisl aliquet</li>
-                                    </ul>
+                                    </ul> -->
                                     
-                                    <h4>Fregit aut Caystro equos</h4>
+                                    <h4>{{ $blog->title}}</h4>
 
-                                    <p>Manet pro aere superest adiacet sua purpura Tereus in multis conantem culpa, inque fingit et referebat? Materiaque mentes et, quo omnia  captiva ore mandat cepit triformis filia. Prius sorte nomina in repellite sentit facunde te aures, vires.</p>
+                                    <p class="mb-5">{{ $blog->description }}</p>
                                     
                                     
                                     <hr class="my-5">
-
-                                    <h2 class="my-4">Code Block</h2>
-
-                                    <div class="code-section-container show-code">
-                                            
-                                        <div class="code-section text-left">
-                                            <pre>
-npm install </pre>
-                                        </div>
-                                    </div>
-
-                                    <h2 class="mb-4 mt-5">Code Block with Toggle</h2>
-
-                                    <div class="code-section-container show-code mb-5">
-                                            
-                                        <button class="btn toggle-code-snippet"><span>Code</span> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down toggle-code-icon"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
-
-                                        <div class="code-section text-left">
-                                            <pre>
-&lt;button type=&quot;button&quot; onclick=&quot;document.getElementById('demo').innerHTML = Date()&quot;&gt;
-    Click me to display Date and Time.
-&lt;/button&gt; </pre>
-                                        </div>
-                                    </div>
-
-                                    <p class="mb-5">Fama creatis cum; ait atque et ictaque stabat, si texit continuere exsatiata vestes, humana arces. Moriens carissime  pudet dextra et aures micantes est, in. Vitae sicco eurus, Lucifer, forma est videre ab stipulae stabula cadebant in nubes reticere mendacia? Adice  Ladon petis. Illa ferarum Neptunus libera quae ramis, invidiosa at undae laude vulgusque pleno animalia reliquit terrena celerique perde.</p>
-
-                                    <h4>Nocte populusque</h4>
-
-                                    <p>Lorem markdownum, ponere patent ista, Cadme, adesse humum non forem putares; adiuro ore viresque est. Inde labores si sustinet regia, levi oris pascere! Rhodon ad lingua perdidit inpia alis! Maiorque de duro!</p>
-
-                                    <p class="mb-5">Sit et angues referente proxima Emathiique nemo: herbae servant eo  corpus cornua tenuata recuso; natis parentem. Nisi nec aquarum, nymphae.</p>
                                     
                                     <img src="../src/assets/img/lightbox-3.jpeg" alt="image-1" class="full-width img-fluid mt-4 mb-5">
-
-                                    <h4>Novato extrema monimenta clivo ille</h4>
-
-                                    <p class="mb-5">Recessit mox patrem ille mea, tumulatus teneri hominis, favilla enim recentes deam cur nocte pro eburnea. Favilla iam suis horruerant Chiae quotiensque ingemuit locumque ducere postquam alebat. Iovi caeli esse superet contraria conscia transierant verae; ut vetuere, suo gerat lumina rugis velletque. Facta innecte de relicta Chrysenque morte, laedor dea aequaret dedit! Sustinui attulit proles potentior.</p>
-
-                                    
-                                    <h4>Aliquod corpora sororibus crimine ornata</h4>
-
-                                    <p class="mb-5">Est convicia et nubibus negate. In nisi inbellibus sui, cruribus vult hostes solum invitat. Vino faciam stratis; non modo in eurus igitur, ambit, mentitus periclo? Ullo dextra, extemplo commenta ultima, quid ire vos toto quia, in habili Gradivus ferarum certaminis attulerat.</p>
-                                    
-
-                                    <h4>Nemus dolet monstravit</h4>
-
-                                    <p class="mb-5">Est et hic volucres, rursus; simul, cauda tamen cacumine pars intendensque . Maius dignior caret coniuge, demugitaeque duce, exponimur anus inritata. Quoque sum casusve corpora, dat caecis doloris scelus domesticus laboris heu quod reliquit. Albenti infra sed Pergama vivere fusus de fecerat sublime prosunt illic. Consensu pavet insistit terras!</p>
-                                    
-                                    <hr class="my-5">
-
-                                    <div class="text-center mb-5">
-                                        <img src="../src/assets/img/slider-3.jpeg" alt="image-1" class="img-fluid">
-                                    </div>
-
-                                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-
-
-                                </div>
-                                
                                 
                                 <div class="post-info">
                                     
