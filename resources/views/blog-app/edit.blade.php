@@ -68,38 +68,6 @@
                             </div>
                         </div>
 
-                        <div class="dropdown-item">
-                            <div class="media ">
-                                <img src="../src/assets/img/profile-15.jpeg" class="img-fluid me-2" alt="avatar">
-                                <div class="media-body">
-                                    <div class="data-info">
-                                        <h6 class="">Daisy Anderson</h6>
-                                        <p class="">8 hrs ago</p>
-                                    </div>
-
-                                    <div class="icon-status">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dropdown-item">
-                            <div class="media file-upload">
-                                <img src="../src/assets/img/profile-21.jpeg" class="img-fluid me-2" alt="avatar">
-                                <div class="media-body">
-                                    <div class="data-info">
-                                        <h6 class="">Oscar Garner</h6>
-                                        <p class="">14 hrs ago</p>
-                                    </div>
-
-                                    <div class="icon-status">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="drodpown-title notification mt-2">
                             <h6 class="d-flex justify-content-between"><span class="align-self-center">Notifications</span> <span class="badge badge-secondary">16 New</span></h6>
                         </div>
@@ -258,14 +226,14 @@
                 </li>
 
 
-                <li class="menu">
+                <!-- <li class="menu">
                     <a href="./app-contacts.html" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                             <span>Contacts</span>
                         </div>
                     </a>
-                </li>
+                </li> -->
 
                
                 <li class="menu">
@@ -280,20 +248,20 @@
                     </a>
                     <ul class="collapse submenu list-unstyled" id="blog" data-bs-parent="#accordionExample">
                         <li>
-                            <a href={{url('/blog-app.grid')}}> Grid </a>
+                            <a href={{url('/blog-app.grid')}}> Home </a>
                         </li>
                         <li>
-                            <a href={{url('/blog-app.list')}}> List </a>
+                            <a href={{url('/blog/list')}}> List </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href={{url('/blog-app.post')}}> Post </a>
-                        </li>
-                        <li>
+                        </li> -->
+                        <li  class="active">
                             <a href={{url('/blog-app.create')}}> Create </a>
                         </li>
-                        <li class="active">
+                        <!-- <li>
                             <a href={{url('/blog-app.edit')}}> Edit </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
 
@@ -327,7 +295,6 @@
 
     </div>
     <!--  END SIDEBAR  -->
-
     <!--  BEGIN CONTENT AREA  -->
     <div id="content" class="main-content">
 
@@ -340,35 +307,35 @@
             <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">App</a></li>
-                    <li class="breadcrumb-item"><a href="#">Blog</a></li>
+                    <li class="breadcrumb-item"><a href={{url('/blog-app.grid')}}>Blog</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Edit</li>
                 </ol>
             </nav>
         </div>
         <!-- /BREADCRUMB -->
-
         <hr>
-            @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
         <div class="row mb-4 layout-spacing layout-top-spacing">
 
             <div class="col-xxl-9 col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
-            <form action={{ route('blog.update', ['id' => $blog->id]) }} method="post">
+            <form action={{ route('blog.update', $blog->id) }} method="post" enctype="multipart/form-data">
                 @csrf
+                @method('put')
                 <div class="widget-content widget-content-area blog-create-section">
                     <div class="row mb-4">
                         <div class="col-sm-12">
                             <label>Title</label>
-                            <div id="blog-description"></div>
+                            <!-- <div id="blog-description"></div> -->
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-sm-12">
-                            <input type="text" name="title" class="form-control" id="post-title" placeholder="Post Title" value="{{old('title', $blog->title)}}">
+                            <input type="text" name="title" class="form-control" id="post-title" placeholder="Post Title" value="{{ old('title', $blog->title) }}" required>
                         </div>
                     </div>
                 </div>
@@ -377,41 +344,85 @@
                     <h5 class="mb-4">Description</h5>
                     <div class="row mb-4">
                         <div class="col-xxl-12 mb-4">
-                            <input type="text" name="description" class="form-control" id="post-meta-title" placeholder="Description" value="{{old('description', $blog->description)}}">
+                            <textarea type="text" name="description" class="form-control" id="post-meta-title" placeholder="Description" required>{{ old('description', $blog->description) }}</textarea>
                         </div>
                         <div class="col-xxl-12" id="editor">
                             <h5 for="post-meta-description">Content</h5>
-                            <textarea name="content" class="form-control" id="post-meta-description" cols="10" rows="5" placeholder="Content" value="{{old('content', $blog->content)}}"></textarea>
+                            <textarea name="content" class="form-control" id="post-meta-description" cols="10" rows="5" placeholder="Content">{{ old('content', $blog->content) }}</textarea>
                         </div>
                     </div>
 
-                    <!-- <div class="col-xxl-12 col-md-12 mb-4">
-                        <label for="product-images">Featured Image</label>
+                    <div class="col-xxl-12 col-md-12 mb-4">
+                        <label for="thumbnail">Thumbnail Image</label>
                         <div class="multiple-file-upload">
                             <input type="file" 
                                     class="filepond file-upload-multiple"
-                                    name="filepond"
+                                    name="thumbnail"
                                     id="product-images" 
                                     multiple 
                                     data-allow-reorder="true"
                                     data-max-file-size="3MB"
                                     data-max-files="5">
+                                    @if ($blog->thumbnail)
+                                        <img src="{{ asset('storage/' . $blog->thumbnail) }}" alt="Thumbnail" class="img-thumbnail mt-2" style="max-width: 150px;">
+                                    @endif 
                         </div>
-                    </div> -->
+                    </div>
 
                     <div class="col-xxl-12 col-sm-4 col-12 mx-auto">
-                        <button class="btn btn-success w-100" type="submit">Save</button>
+                        <button class="btn btn-success w-100" type="submit">Update</button>
                     </div>
 
                     </form>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    @endif
 
                 </div>
                 
                 
             </div>
 
+            <!-- <div class="col-xxl-3 col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-xxl-0 mt-4">
+                <div class="widget-content widget-content-area blog-create-section">
+                    <div class="row">
+                        <div class="col-xxl-12 mb-4">
+                            <div class="switch form-switch-custom switch-inline form-switch-primary">
+                                <input class="switch-input" type="checkbox" role="switch" id="showPublicly" checked>
+                                <label class="switch-label" for="showPublicly">Publish</label>
+                            </div>
+                        </div>
+                        <div class="col-xxl-12 mb-4">
+                            <div class="switch form-switch-custom switch-inline form-switch-primary">
+                                <input class="switch-input" type="checkbox" role="switch" id="enableComment" checked>
+                                <label class="switch-label" for="enableComment">Enable Comments</label>
+                            </div>
+                        </div>
+                        <div class="col-xxl-12 col-md-12 mb-4">
+                            <label for="tags">Tags</label>
+                            <input id="tags" class="blog-tags" value="">
+                        </div>
+
+                        <div class="col-xxl-12 col-md-12 mb-4">
+                            <label for="category">Category</label>
+                            <input id="category" name="category" placeholder="Choose...">
+                        </div>
+                        <div class="col-xxl-12 col-sm-4 col-12 mx-auto">
+                            <button class="btn btn-success w-100">Create Post</button>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+        
     </div>
-    
+
 </div>
 
 

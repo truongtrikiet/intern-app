@@ -20,6 +20,7 @@ class Blog extends Model
         'slug',
         'description',
         'content',
+        'thumbnail',
         'publish_date',
         'status_blog',
     ];

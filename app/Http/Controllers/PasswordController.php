@@ -48,15 +48,13 @@ class PasswordController extends Controller
         $tokenData = PasswordResetTokens::where('token', $token)->firstOrFail();
         $email = $tokenData->email;
 
-        // dd($email);
-
         return view('auth.auth-boxed-password-reset', compact('token', 'email'));
     }
     public function resetPasswordPost(Request $request) {
         $request->validate([
-            'email' => 'required|email|exists:users, email',
-            'password' => 'required|string|min:8|regex:/^[a-zA-Z0-9~!@£¢#∞&*]+$/|confirmed',
-            // 'password_confirmation' => 'required'
+            'email' => 'required|email|exists:users,email',
+            'password' => ['required', 'string', 'min:8', 'regex:/^[a-zA-Z0-9~!@£¢#∞&*]+$/', 'confirmed'],
+            'token' => 'required|string|exists:password_reset_tokens,token',
         ]);
 
         $updatePassword = PasswordResetTokens::where('email', $request->email)
@@ -72,6 +70,6 @@ class PasswordController extends Controller
 
         PasswordResetTokens::where('email', $request->email)->delete();
 
-        return redirect()->route('/')->with('status', 'Password has been reset, please sign in again.');
+        return redirect()->route('signinPage')->with('status', 'Password has been reset, please sign in again.');
     }
 }

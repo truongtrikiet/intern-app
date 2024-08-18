@@ -68,38 +68,6 @@
                             </div>
                         </div>
 
-                        <div class="dropdown-item">
-                            <div class="media ">
-                                <img src="../src/assets/img/profile-15.jpeg" class="img-fluid me-2" alt="avatar">
-                                <div class="media-body">
-                                    <div class="data-info">
-                                        <h6 class="">Daisy Anderson</h6>
-                                        <p class="">8 hrs ago</p>
-                                    </div>
-
-                                    <div class="icon-status">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dropdown-item">
-                            <div class="media file-upload">
-                                <img src="../src/assets/img/profile-21.jpeg" class="img-fluid me-2" alt="avatar">
-                                <div class="media-body">
-                                    <div class="data-info">
-                                        <h6 class="">Oscar Garner</h6>
-                                        <p class="">14 hrs ago</p>
-                                    </div>
-
-                                    <div class="icon-status">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="drodpown-title notification mt-2">
                             <h6 class="d-flex justify-content-between"><span class="align-self-center">Notifications</span> <span class="badge badge-secondary">16 New</span></h6>
                         </div>
@@ -355,7 +323,7 @@
 
             <div class="col-xxl-9 col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
-            <form action={{ route('blog.store') }} method="post">
+            <form action={{ route('blog.store') }} method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="widget-content widget-content-area blog-create-section">
                     <div class="row mb-4">
@@ -375,7 +343,7 @@
                     <h5 class="mb-4">Description</h5>
                     <div class="row mb-4">
                         <div class="col-xxl-12 mb-4">
-                            <input type="text" name="description" class="form-control" id="post-meta-title" placeholder="Description" required>
+                            <textarea type="text" name="description" class="form-control" id="post-meta-title" placeholder="Description" required></textarea>
                         </div>
                         <div class="col-xxl-12" id="editor">
                             <h5 for="post-meta-description">Content</h5>
@@ -383,19 +351,19 @@
                         </div>
                     </div>
 
-                    <!-- <div class="col-xxl-12 col-md-12 mb-4">
-                        <label for="product-images">Featured Image</label>
+                    <div class="col-xxl-12 col-md-12 mb-4">
+                        <label for="thumbnail">Thumbnail Image</label>
                         <div class="multiple-file-upload">
                             <input type="file" 
                                     class="filepond file-upload-multiple"
-                                    name="filepond"
+                                    name="thumbnail"
                                     id="product-images" 
                                     multiple 
                                     data-allow-reorder="true"
                                     data-max-file-size="3MB"
                                     data-max-files="5">
                         </div>
-                    </div> -->
+                    </div>
 
                     <div class="col-xxl-12 col-sm-4 col-12 mx-auto">
                         <button class="btn btn-success w-100" type="submit">Create Post</button>

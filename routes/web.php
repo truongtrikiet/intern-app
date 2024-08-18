@@ -26,11 +26,11 @@ Route::get('/home', [UserController::class, 'index']);
 
 
 //sign in and sign up Logout //AUTH CONTROLLER
-Route::get('/', [AuthController::class, 'signinPage']) -> name('signinPage');
-Route::post('/signin', [AuthController::class, 'signin']) -> name('signin.post');
-Route::get('/signup', [AuthController::class, 'signupPage']) -> name('signupPage');
-Route::post('/signup', [AuthController::class, 'signup']) -> name('signup.post');
-Route::post('/logout', [AuthController::class, 'logout']) -> name('logout');
+Route::get('/', [AuthController::class, 'signinPage'])->name('signinPage');
+Route::post('/signin', [AuthController::class, 'signin'])->name('signin.post');
+Route::get('/signup', [AuthController::class, 'signupPage'])->name('signupPage');
+Route::post('/signup', [AuthController::class, 'signup'])->name('signup.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 //reset password CONTROLLER
@@ -71,8 +71,6 @@ Route::middleware(['auth', 'admin'])->group(function(){
 
 
 //profile //UserController
-// Route::get('/profile/{email}', [UserController::class, 'profilePage'])->name('profile.page');
-// Route::post('profile/update/{email}', [UserController::class, 'profileUpdate'])->name('profile.update');
 Route::middleware(['auth'])->group(function(){
     Route::get('/profile/{email}', [UserController::class, 'profilePage'])->name('profile.page');
     Route::post('/profile/{email}/update', [UserController::class, 'profileUpdate'])->name('profile.update');
@@ -81,8 +79,7 @@ Route::middleware(['auth'])->group(function(){
 //manage-page
 //BLOG PAGE
 Route::middleware('auth')->group(function () {
-    // Route::resource('blogs', BlogController::class);
-    // Route::resource('blog', BlogController::class);
+    Route::resource('blogs', BlogController::class);
 
     Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
     Route::get('/blog/list', [BlogController::class, 'list'])->name('blog.list');
@@ -92,7 +89,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/blog/{id}/edit', [BlogController::class, 'edit'])->name('blog.edit');
     Route::put('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
     Route::delete('/blog/{blog}', [BlogController::class, 'destroy'])->name('blog.destroy');
-
 });
 
 

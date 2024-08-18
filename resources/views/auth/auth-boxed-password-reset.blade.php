@@ -20,30 +20,45 @@
                                 <form action={{route('reset.password.post')}} method="post">
                                     @csrf
                                 <input type="text" name="token" hidden value="{{ $token }}" >
+                                <!-- <input type="hidden" name="email" value="{{ $email }}"> -->
 
                                 <div class="col-md-12">
                                     <div class="mb-4">
                                         <label class="form-label">Email</label>
-                                        <input type="email" class="form-control" name="email" value={{ old('email', $email) }} readonly>
+                                        <input type="email" class="form-control" name="email" value="{{ old('email') }}" required>
                                     </div>
+                                    @if (session('error'))
+                                        <div class="alert alert-danger">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-4">
                                         <label class="form-label">New Password</label>
-                                        <input type="password" class="form-control" name="password" required>
+                                        <input type="password" class="form-control" name="password" value="{{ old('password') }}" required>
                                     </div>
-                                    @error('new_password')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                    @if ($errors->has('password'))
+                                        <div class="alert alert-danger">{{ $errors->first('password') }}</div>
+                                    @endif
+                                    @if ($errors->has('password.regex'))
+                                        <div class="alert alert-danger">{{ $errors->first('password.regex') }}</di>
+                                    @endif
+                                    @if ($errors->has('password.min'))
+                                        <div class="alert alert-danger">{{ $errors->first('password.min') }}</div>
+                                    @endif
                                 </div>
                                 <div class="col-md-12">
                                     <div class="mb-4">
                                         <label class="form-label">Repeat New Password</label>
-                                        <input type="password" class="form-control" name="password_confirmation" required>
+                                        <input type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}" required>
                                     </div>
-                                    @error('password_confirmation')
-                                        <div>{{ $message }}</div>
-                                    @enderror
+                                    @if ($errors->has('password_confirmation'))
+                                        <div class="alert alert-danger">{{ $errors->first('password_confirmation') }}</div>
+                                    @endif
+                                    @if ($errors->has('password_confirmation.confirmed'))
+                                        <div class="alert alert-danger">{{ $errors->first('password_confirmation.confirmed') }}</div>
+                                    @endif
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-4">
