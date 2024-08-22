@@ -382,7 +382,9 @@
         @foreach ($blogs as $blog)
         <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4">
                 <a href={{route('blog.show', $blog->id)}} class="card style-2 mb-md-0 mb-4">
-                    <img src="../src/assets/img/grid-blog-style-2.jpeg" class="card-img-top" alt="...">
+                    <!-- <img src="../src/assets/img/grid-blog-style-2.jpeg" class="card-img-top" alt="..."> -->
+                     
+                    <img src="{{ asset('/upload/blogs'.$blog->thumbnail) }}" class="card-img-top">
                     <div class="card-body px-0 pb-0">
                         <h5 class="card-title mb-3">{{ $blog->title }}</h5>
                         <div class="media mt-4 mb-0 pt-1">

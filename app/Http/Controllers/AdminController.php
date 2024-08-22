@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlogStatusUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Enums\Status;
@@ -28,7 +29,7 @@ class AdminController extends Controller
 
     public function userEdit($email) {
         $user = User::where('email', $email)->firstOrFail();
-        return view('user-by-admin.edit', ['user' => $user]);
+        return view('user-by-admin.edit-user', ['user' => $user]);
     }
     public function userUpdate(UserUpdateRequest $request, $email) {
         $user = User::where('email', $email)->firstOrFail();
@@ -52,15 +53,19 @@ class AdminController extends Controller
         $blogs = Blog::all();
         return view('admin.blog-manage', ['blogs' => $blogs]);
     }
-    public function updateBlogStatus(Request $request, Blog $blog) {
-        $request->validate([
-            'status_blog' => ['required', new Enum(BlogStatus::class)],
-        ]);
-        $blog->update([
-            'status_blog' => $request->input('status_blog')
-        ]);
+    public function showBlog($id){
+        $blog = Blog::find($id);
+        return view('user-by-admin.show-blog', ['blog' => $blog]);
+    }
+    public function blogEdit($id) {
+        $blog = Blog::where('id', $id)->firstOrFail();
+        return view('user-by-admin.edit-blog', ['blog' => $blog]);
+    }
+    public function updateBlogStatus(BlogStatusUpdateRequest $request, $blog) {
+        $blog = Blog::where('id', $blog)->firstOrFail();
+        $blog->status_blog = $request->input('status_blog');
+        $blog->save();
 
         return redirect()->route('admin.blog.manage')->with('success', 'Blog status updated successfully.');
     }
-
 }

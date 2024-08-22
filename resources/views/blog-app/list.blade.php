@@ -313,11 +313,11 @@
                         </div>
                     </a>
                     <ul class="collapse submenu list-unstyled" id="users" data-bs-parent="#accordionExample">
-                        <li>
-                            <a href="./user-profile.html"> Profile </a>
-                        </li>
-                        <li>
-                            <a href="./user-account-settings.html"> Account Settings </a>
+                    <li>
+                        @php
+                            $user = Auth::user();
+                        @endphp
+                            <a href={{route('profile.page', ['email' => $user->email])}}> Profile </a>
                         </li>
                     </ul>
                 </li>
@@ -387,7 +387,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <img src={{ $blog->thumbnail }} alt="Img" style="width: 70px; height: 90px;">
+                                    <img src={{ $blog->getFirstMediaUrl('thumbnails') }} alt="" style="width: 70px; height: 90px;">
                                 </td>
                                 <td>{{ $blog->publish_date }}</td>
                                 <td><span class="badge badge-danger">
@@ -411,23 +411,20 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
                                         </a>
 
-                                        <form>
-                                            @csrf
+                                        <!-- <form> -->
+                                            <!-- @csrf -->
                                             <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink20">
                                                 <a class="dropdown-item" href="javascript:void(0);">View</a>
                                                 <a class="dropdown-item" href="javascript:void(0);">Edit</a>
                                                 <a class="dropdown-item" href="javascript:void(0);">Delete</a>
                                             </div> -->
                                             <div>
-
                                                 <a href={{ route('blog.show', $blog)}}>View</a> |
                                                 <a href={{ route('blog.edit', $blog)}}>Edit</a> |
                                                 <a href="#" class="delete-btn" data-id="{{ $blog->id }}" >Delete</a>
-                                                
-
                                             </div>
 
-                                        </form>
+                                        <!-- </form> -->
                                     </div>
                                 </td>
                             </tr>
@@ -435,7 +432,7 @@
                         <div id="deleteModal" class="modal">
                             <div class="modal-content">
                                 <p>Are you sure you want to delete this blog?</p>
-                                    <form id="deleteForm" method="post" action="">
+                                    <form id="deleteForm" method="post" action="{{ route('blog.destroy', $blog)}}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Delete</button>

@@ -383,7 +383,7 @@
                 <h4>{{ $blog->title }}</h4>
                 <p class="mb-5">{{ $blog->description }}</p>
                 <!-- <hr class="my-5"> -->
-                <img src={{ asset( $blog->thumbnail )}} alt="image" class="full-width img-fluid mt-4 mb-5">
+                <img src={{ $blog->getFirstMediaUrl('thumbnails') }} alt="image" class="full-width img-fluid mt-4 mb-5">
                 <div class="post-info">
                     <p class="mb-4">{{ $blog->content }}</p>
                 </div>

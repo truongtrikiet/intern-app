@@ -66,19 +66,21 @@ Route::middleware(['auth', 'admin'])->group(function(){
 
     //blog manage
     Route::get('/blog-manage', [AdminController::class, 'manageBlog'])->name('admin.blog.manage');
-    Route::post('/blog-manage/{$id}', [AdminController::class, 'updateBlogStatus'])->name('admin.blog.update');
+    Route::get('blog-manage/{id}/view', [AdminController::class, 'showBlog'])->name('admin.blog.show');
+    Route::get('/blog-manage/{id}/edit', [AdminController::class, 'blogEdit'])->name('admin.blog.edit');
+    Route::post('/blog-manage/{id}', [AdminController::class, 'updateBlogStatus'])->name('admin.blog.update');
 });
 
 
 //profile //UserController
 Route::middleware(['auth'])->group(function(){
     Route::get('/profile/{email}', [UserController::class, 'profilePage'])->name('profile.page');
-    Route::post('/profile/{email}/update', [UserController::class, 'profileUpdate'])->name('profile.update');
+    Route::post('/profile/update', [UserController::class, 'profileUpdate'])->name('profile.update');
 });
 
 //manage-page
 //BLOG PAGE
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function(){
     Route::resource('blogs', BlogController::class);
 
     Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');

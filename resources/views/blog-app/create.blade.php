@@ -281,11 +281,11 @@
                         </div>
                     </a>
                     <ul class="collapse submenu list-unstyled" id="users" data-bs-parent="#accordionExample">
-                        <li>
-                            <a href="./user-profile.html"> Profile </a>
-                        </li>
-                        <li>
-                            <a href="./user-account-settings.html"> Account Settings </a>
+                    <li>
+                        @php
+                            $user = Auth::user();
+                        @endphp
+                            <a href={{route('profile.page', ['email' => $user->email])}}> Profile </a>
                         </li>
                     </ul>
                 </li>

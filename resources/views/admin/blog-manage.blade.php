@@ -272,12 +272,12 @@
                         <li>
                             <a href={{url('/admin')}}> Home </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href={{url('/index')}}> Analytics </a>
                         </li>
                         <li>
                             <a href={{url('/index2')}}> Sales </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href={{url('/user-manage')}}> Users Manage </a>
                         </li>
@@ -303,7 +303,7 @@
 
                
                 <li class="menu">
-                    <a href="#blog" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <!-- <a href="#blog" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pen-tool"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
                             <span>Blog</span>
@@ -328,7 +328,7 @@
                         <li>
                             <a href={{url('/blog-app.edit')}}> Edit </a>
                         </li>
-                    </ul>
+                    </ul> -->
                 </li>
 
 
@@ -337,7 +337,7 @@
                 </li>
 
                 <li class="menu">
-                    <a href="#users" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <!-- <a href="#users" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                         <div class="">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                             <span>Users</span>
@@ -353,7 +353,7 @@
                         <li>
                             <a href="./user-account-settings.html"> Account Settings </a>
                         </li>
-                    </ul>
+                    </ul> -->
                 </li>
 
                 <li class="menu">
@@ -502,8 +502,8 @@
                                                     </td>
                                                     <td>
                                                         <div>
-                                                            <a class="dropdown-item" href={{route('blog.show', $blog->id)}}>View</a>
-                                                            <a class="dropdown-item" href={{route('blog.edit', $blog->id)}}>Edit</a>
+                                                            <a class="dropdown-item" href={{route('admin.blog.show', $blog->id)}}>View</a>
+                                                            <a class="dropdown-item" href={{route('admin.blog.edit', $blog->id)}}>Edit</a>
                                                             <a class="dropdown-item" href="">Delete</a>
                                                         </div>
                                                     </td>
