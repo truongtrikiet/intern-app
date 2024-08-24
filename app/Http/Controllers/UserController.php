@@ -26,4 +26,12 @@ class UserController extends Controller
         return redirect()->route('profile.page', ['email' => $user->email])->with('success', 'Updated successfully.');
     }
 
+
+    //user delete all blogs
+    public function destroyAllBlogs(User $user) {
+        $user->blogs()->delete(); 
+        
+        return redirect()->route('blog.list')->with('success', 'All blogs has been deleted.');
+    }
+
 }

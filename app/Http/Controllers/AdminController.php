@@ -11,6 +11,7 @@ use App\Mail\UserStatusMail;
 use Database\Seeders\BlogSeeder;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Enum;
+use App\Mail\BlogStatusMail;
 use App\Enums\BlogStatus;
 use App\Models\Blog;
 
@@ -66,6 +67,10 @@ class AdminController extends Controller
         $blog->status_blog = $request->input('status_blog');
         $blog->save();
 
-        return redirect()->route('admin.blog.manage')->with('success', 'Blog status updated successfully.');
+        if ($blog->status_blog == BlogStatus::NewBlog->value) {
+            Mail::to($blog->user_email)->send(new BlogStatusMail($blog));
+        }
+
+        return redirect()->route('admin.blog.manage')->with('success', 'Blog status updated successfully, mail have been sent.');
     }
 }

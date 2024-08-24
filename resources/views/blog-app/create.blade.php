@@ -257,7 +257,7 @@
                             <a href={{url('/blog-app.post')}}> Post </a>
                         </li> -->
                         <li  class="active">
-                            <a href={{url('/blog-app.create')}}> Create </a>
+                            <a href={{url('/blog/create')}}> Create </a>
                         </li>
                         <!-- <li>
                             <a href={{url('/blog-app.edit')}}> Edit </a>
@@ -298,9 +298,9 @@
     <!--  BEGIN CONTENT AREA  -->
     <div id="content" class="main-content">
 
-<div class="layout-px-spacing">
+        <div class="layout-px-spacing">
 
-    <div class="middle-content container-xxl p-0">
+        <div class="middle-content container-xxl p-0">
 
         <!-- BREADCRUMB -->
         <div class="page-meta">
@@ -319,22 +319,27 @@
                         {{ session('success') }}
                     </div>
                 @endif
+
+        <form action="{{ route('blog.store') }}" method="post" enctype="multipart/form-data">
+            @csrf
         <div class="row mb-4 layout-spacing layout-top-spacing">
 
             <div class="col-xxl-9 col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
-            <form action={{ route('blog.store') }} method="post" enctype="multipart/form-data">
-                @csrf
+           
                 <div class="widget-content widget-content-area blog-create-section">
                     <div class="row mb-4">
                         <div class="col-sm-12">
                             <label>Title</label>
-                            <div id="blog-description"></div>
+                            <!-- <div id="post-meta-title"></div> -->
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-sm-12">
-                            <input type="text" name="title" class="form-control" id="post-title" placeholder="Post Title" required>
+                            <input type="text" name="title" class="form-control" id="post-title" placeholder="Post Title" value="{{ old('title') }}" required>
+                        @error('title')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                         </div>
                     </div>
                 </div>
@@ -343,38 +348,36 @@
                     <h5 class="mb-4">Description</h5>
                     <div class="row mb-4">
                         <div class="col-xxl-12 mb-4">
-                            <textarea type="text" name="description" class="form-control" id="post-meta-title" placeholder="Description" required></textarea>
+                            <textarea type="text" name="description" class="form-control" id="blog-description" placeholder="Description" required>{{ old('description') }}</textarea>
+                        @error('description')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                         </div>
-                        <div class="col-xxl-12" id="editor">
+
+                        <div class="col-xxl-12">
                             <h5 for="post-meta-description">Content</h5>
-                            <textarea name="content" class="form-control" id="post-meta-description" cols="10" rows="5" placeholder="Content"></textarea>
+                            <textarea name="content" class="form-control" id="" cols="10" rows="5" placeholder="Content" >{{ old('content') }}</textarea>
+                        @error('content')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                         </div>
                     </div>
 
                     <div class="col-xxl-12 col-md-12 mb-4">
                         <label for="thumbnail">Thumbnail Image</label>
                         <div class="multiple-file-upload">
-                            <input type="file" 
-                                    class="filepond file-upload-multiple"
-                                    name="thumbnail"
-                                    id="product-images" 
-                                    multiple 
-                                    data-allow-reorder="true"
-                                    data-max-file-size="3MB"
-                                    data-max-files="5">
+                            <input type="file" name="thumbnail" id="thumbnail" class="form-control" value="{{ old('thumbnail') }}">
                         </div>
                     </div>
 
                     <div class="col-xxl-12 col-sm-4 col-12 mx-auto">
                         <button class="btn btn-success w-100" type="submit">Create Post</button>
                     </div>
-
-                    </form>
-
                 </div>
-                
-                
-            </div>
+
+            </div>         
+        </div>
+        </form>
 
             <!-- <div class="col-xxl-3 col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-xxl-0 mt-4">
                 <div class="widget-content widget-content-area blog-create-section">
@@ -410,26 +413,12 @@
 
         </div>
         
-    </div>
-
-</div>
-
-
-            
-            <!--  BEGIN FOOTER  -->
-            <div class="footer-wrapper">
-                <div class="footer-section f-section-1">
-                    <p class="">Copyright © <span class="dynamic-year">2022</span> <a target="_blank" href="https://designreset.com/cork-admin/">DesignReset</a>, All rights reserved.</p>
-                </div>
-                <div class="footer-section f-section-2">
-                    <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
-                </div>
-            </div>
-            <!--  END FOOTER  -->
-
         </div>
-        <!--  END CONTENT AREA  -->
+
+    <!--  END CONTENT AREA  -->
     </div>
-    <!-- END MAIN CONTAINER -->
+
     
+<!-- END MAIN CONTAINER -->
+</div> 
     

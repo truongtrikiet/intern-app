@@ -44,7 +44,7 @@ class Blog extends Model implements HasMedia
         // 'publish_date' => 'datetime',
     ];
 
-    public function getStatusLabelAttribute(): string {
+    public function getStatusBlogLabelAttribute(): string {
         return $this->status_blog->label();
     }
 }

@@ -358,8 +358,23 @@
             </div>
         @endif
 
-        <div class="row layout-top-spacing">
-    
+        <div class="col-xxl-12 col-sm-4 col-12 mx-auto">
+            <form id="deleteAllForm" method="post" action="{{ route('delete.all.blogs', $user->id) }}" onsubmit="return confirm('Are you sure?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Delete All</button>
+            </form>
+        </div>
+        <!-- tag -->
+
+            <!-- <div id="deleteAllModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <p>Are you sure you want to delete all blogs?</p>
+                    <button type="submit" class="btn btn-danger">Delete All</button>
+                    <button type="button" class="btn btn-secondary close">Cancel</button>
+                </div>
+            </div> -->
+        <!-- tag -->
             <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                 <div class="widget-content widget-content-area br-8">
                     <table id="blog-list" class="table dt-table-hover" style="width:100%">
@@ -367,6 +382,7 @@
                             <tr>
                                 <th>Title Post</th>
                                 <th>Thumbnail</th>
+                                <!-- <th>Slug</th> -->
                                 <th>Date</th>
                                 <th>Status</th>
                                 <th class="no-content text-center">Action</th>
@@ -378,19 +394,23 @@
                             <tr>
                                 <td>
                                     <div class="d-flex justify-content-left align-items-center">
-                                        <!-- <div class="avatar  me-3">
-                                            <img src="../src/assets/img/avatars-1.svg" alt="Avatar" width="64" height="64">
-                                        </div> -->
                                         <div class="d-flex flex-column">
                                             <span class="text-truncate fw-bold">{{ $blog->title }}</span>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <img src={{ $blog->getFirstMediaUrl('thumbnails') }} alt="" style="width: 70px; height: 90px;">
+                                    <!-- @if ($blog->hasMedia('thumbnail'))
+                                        <img src={{ $blog->getFirstMediaUrl('thumbnail') }} alt="Thumbnail" style="width: 70px; height: 90px;">
+                                    @else
+                                        <img src="{{ asset('assets/images/no-image.jpg') }}" alt="Thumbnail" style="width: 70px; height: 90px;">
+                                    @endif -->
+                                    <img src="../src/assets/img/grid-blog-style-1.jpeg" style="width: 70px; height: 90px;">
                                 </td>
+                                <!-- <td>{{ $blog->slug }}</td> -->
                                 <td>{{ $blog->publish_date }}</td>
                                 <td><span class="badge badge-danger">
+                                    <!-- {{ $blog->status_blog}} -->
                                     @switch($blog->status_blog)
                                         @case(0)
                                             Waiting
@@ -412,35 +432,30 @@
                                         </a>
 
                                         <!-- <form> -->
-                                            <!-- @csrf -->
-                                            <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuLink20">
-                                                <a class="dropdown-item" href="javascript:void(0);">View</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Edit</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                            </div> -->
                                             <div>
-                                                <a href={{ route('blog.show', $blog)}}>View</a> |
-                                                <a href={{ route('blog.edit', $blog)}}>Edit</a> |
-                                                <a href="#" class="delete-btn" data-id="{{ $blog->id }}" >Delete</a>
+                                                <a href={{ route('blog.show', $blog->slug)}}>View</a> |
+                                                <a href={{ route('blog.edit', $blog)}}>Edit</a> 
+                                                <!-- <a href="#" class="delete-btn" data-id="{{ $blog->id }}" >Delete</a> -->
                                             </div>
 
                                         <!-- </form> -->
+
                                     </div>
                                 </td>
                             </tr>
                         @endforeach
-                        <div id="deleteModal" class="modal">
-                            <div class="modal-content">
-                                <p>Are you sure you want to delete this blog?</p>
-                                    <form id="deleteForm" method="post" action="{{ route('blog.destroy', $blog)}}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                        <button type="button" class="btn btn-secondary close">Cancel</button>
-                                    </form>
-                            </div>
-                        </div>
-                            
+                        
+                            <!-- <div id="deleteModal-{{ $blog->id }}" class="modal" style="display:none;">
+                                    <div class="modal-content">
+                                        <p>Are you sure you want to delete this blog?</p>
+                                            <form id="deleteForm-{{ $blog->id }}" method="post" action="{{ route('blog.destroy', $blog)}}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-secondary close">Cancel</button>
+                                            </form>
+                                    </div>
+                                 </div> -->
                         </tbody>
                     </table>
                 </div>
@@ -451,19 +466,6 @@
     </div>
 
 </div>
-
-
-            
-            <!--  BEGIN FOOTER  -->
-            <!-- <div class="footer-wrapper">
-                <div class="footer-section f-section-1">
-                    <p class="">Copyright © <span class="dynamic-year">2022</span> <a target="_blank" href="https://designreset.com/cork-admin/">DesignReset</a>, All rights reserved.</p>
-                </div>
-                <div class="footer-section f-section-2">
-                    <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
-                </div>
-            </div> -->
-            <!--  END FOOTER  -->
 
         </div>
         <!--  END CONTENT AREA  -->

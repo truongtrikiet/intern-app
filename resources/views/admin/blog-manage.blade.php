@@ -465,6 +465,11 @@
                                         </div>
                                     </div>
                                 </div> -->
+                                @if(session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
                                 
                                     <div class="form-group">
                                         <table class="table dt-table-hover" style="width:100%">

@@ -1,6 +1,6 @@
 //textarea for form submit
 document.addEventListener("DOMContentLoaded", function () {
-    var quill = new quill('#editor', {
+    var quill = new Quill('#editor', {
         theme: 'snow'
     });
 
@@ -13,16 +13,18 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //for edit 
-document.addEventListener("DOMContentLoaded", function () {
-    var quill = new quill('#editor', {
-        theme: 'snow'
-    });
+// document.addEventListener("DOMContentLoaded", function () {
+//     var quill = new Quill('#editor', {
+//         theme: 'snow'
+//     });
 
-    var content = document.querySelector('textarea[name=content]');
-    quill.root.innerHTML = content.value;
+//     var content = document.querySelector('textarea[name=content]');
+//     // Gán nội dung hiện có vào Quill editor
+//     quill.root.innerHTML = content.value;
 
-    var form = document.querySelector('form');
-    form.onsubmit = function() {
-        content.value = quill.root.innerHTML;
-    };
-});
+//     var form = document.querySelector('form');
+//     form.onsubmit = function() {
+//         // Cập nhật lại nội dung của textarea trước khi submit
+//         content.value = quill.root.innerHTML;
+//     };
+// });

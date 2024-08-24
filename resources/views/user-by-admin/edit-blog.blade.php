@@ -52,11 +52,11 @@
                             <button class="btn btn-secondary w-100" type="submit" >SAVE</button>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                         <div class="mb-4">
-                            <button class="btn btn-light-dark mb-2 me-4 w-100" href={{url('/user-manage')}}>CANCEL</button>
+                            <button class="btn btn-light-dark mb-2 me-4 w-100" type="submit" href={{url('/blog-manage')}}>CANCEL</button>
                         </div>
-                    </div>
+                    </div> -->
                 </form>
 
             </div>

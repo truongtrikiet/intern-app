@@ -22,11 +22,13 @@ class BlogRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_email' => 'required|email|exists:users,email',
             'title' => 'required|string|max:100',
             'description' => 'required|string|max:200',
             'content' => 'nullable|string',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'publish_date' => 'nullable|date',
+            'status_blog' => 'required|in:0,1,2',
         ];
     }
 }

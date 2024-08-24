@@ -338,6 +338,22 @@
                             <input type="text" name="title" class="form-control" id="post-title" placeholder="Post Title" value="{{ old('title', $blog->title) }}" required>
                         </div>
                     </div>
+                    <div class="col-xxl-12 mb-4">
+                        <h5 for="post-meta-description">Slug</h5>
+                        <input name="slug" class="form-control" id="post-meta-description" cols="10" rows="5" value={{ old('slug', $blog->slug) }} readonly>
+                    </div>
+
+                    <!-- <div class="row mb-4">
+                        <div class="col-sm-12">
+                            <label>Blog Status</label>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-sm-12">
+                            <input type="text" name="status_blog" class="form-control" id="status_blog" placeholder="Status Blog" value="{{  old('status_blog', $blog->status_blog) }}" readonly>
+                        </div>
+                    </div> -->
+
                 </div>
 
                 <div class="widget-content widget-content-area blog-create-section mt-4">
@@ -346,9 +362,9 @@
                         <div class="col-xxl-12 mb-4">
                             <textarea type="text" name="description" class="form-control" id="post-meta-title" placeholder="Description" required>{{ old('description', $blog->description) }}</textarea>
                         </div>
-                        <div class="col-xxl-12" id="editor">
+                        <div class="col-xxl-12 mb-4">
                             <h5 for="post-meta-description">Content</h5>
-                            <textarea name="content" class="form-control" id="post-meta-description" cols="10" rows="5" placeholder="Content">{{ old('content', $blog->content) }}</textarea>
+                            <textarea id="editor" name="content" class="form-control" id="post-meta-description" cols="10" rows="5">{{ old('content', $blog->content) }}</textarea>
                         </div>
                     </div>
 
@@ -364,7 +380,7 @@
                                     data-max-file-size="3MB"
                                     data-max-files="5">
                                     @if ($blog->thumbnail)
-                                        <img src="{{ asset('storage/' . $blog->thumbnail) }}" alt="Thumbnail" class="img-thumbnail mt-2" style="max-width: 150px;">
+                                        <img src="{{ $blog->getFirstMediaUrl('thumbnails') }}" alt="Thumbnail" class="img-thumbnail mt-2" style="max-width: 150px;">
                                     @endif 
                         </div>
                     </div>
@@ -374,6 +390,15 @@
                     </div>
 
                     </form>
+
+                    <div class="col-xxl-12 col-sm-4 col-12 mx-auto">
+                        <form action="{{ route('blog.destroy', $blog->id) }}" method="post" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger w-100" type="submit" onclick="return confirm('Are you sure you want to delete this blog?')">Delete</button>
+                        </form>
+                    </div>
+
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             @foreach ($errors->all() as $error)

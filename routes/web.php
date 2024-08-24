@@ -76,18 +76,20 @@ Route::middleware(['auth', 'admin'])->group(function(){
 Route::middleware(['auth'])->group(function(){
     Route::get('/profile/{email}', [UserController::class, 'profilePage'])->name('profile.page');
     Route::post('/profile/update', [UserController::class, 'profileUpdate'])->name('profile.update');
+    Route::delete('/delete-all-blogs', [UserController::class, 'destroyAllBlogs'])->name('delete.all.blogs');
 });
 
 //manage-page
 //BLOG PAGE
 Route::middleware('auth')->group(function(){
-    Route::resource('blogs', BlogController::class);
+    // Route::resource('blogs', BlogController::class);
 
-    Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+    // Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
     Route::get('/blog/list', [BlogController::class, 'list'])->name('blog.list');
     Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
     Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
-    Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
+    // Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
+    Route::get('/news/{$slug}', [BlogController::class, 'show'])->name('blog.show');
     Route::get('/blog/{id}/edit', [BlogController::class, 'edit'])->name('blog.edit');
     Route::put('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
     Route::delete('/blog/{blog}', [BlogController::class, 'destroy'])->name('blog.destroy');

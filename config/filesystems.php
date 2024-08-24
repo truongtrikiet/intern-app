@@ -57,8 +57,8 @@ return [
         ],
         'blogs' => [
             'driver' => 'local',
-            'root' => public_path('upload/blogs'),
-            'url' => env('APP_URL').'/upload/blogs',
+            'root' => public_path('upload'),
+            'url' => env('APP_URL').'public/upload',
             'visibility' => 'public',
         ],
 

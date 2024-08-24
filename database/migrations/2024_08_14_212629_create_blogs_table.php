@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('user_email')->nullable(false);
             $table->string('title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('description')->nullable();
             $table->text('content')->nullable();
             $table->timestamp('publish_date')->nullable();
