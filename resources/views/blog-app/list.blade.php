@@ -359,7 +359,7 @@
         @endif
 
         <div class="col-xxl-12 col-sm-4 col-12 mx-auto">
-            <form id="deleteAllForm" method="post" action="{{ route('delete.all.blogs', $user->id) }}" onsubmit="return confirm('Are you sure?');">
+            <form action="{{ route('delete.all.blogs') }}" method="post"  onsubmit="return confirm('Are you sure to delete all?');">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete All</button>
@@ -400,12 +400,13 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <!-- @if ($blog->hasMedia('thumbnail'))
-                                        <img src={{ $blog->getFirstMediaUrl('thumbnail') }} alt="Thumbnail" style="width: 70px; height: 90px;">
-                                    @else
-                                        <img src="{{ asset('assets/images/no-image.jpg') }}" alt="Thumbnail" style="width: 70px; height: 90px;">
-                                    @endif -->
-                                    <img src="../src/assets/img/grid-blog-style-1.jpeg" style="width: 70px; height: 90px;">
+                                @if ($blog->hasMedia('thumbnail'))
+                                    <img src="{{ $blog->getFirstMedidaUrl('thumbnail')}}" alt="Thumbnail">
+                                @else 
+                                    <img src="{{ asset('assets/images/default-thumbnail.jpg') }}" alt="Thumbnail">
+                                @endif
+                                    <!-- <img src="../src/assets/img/grid-blog-style-2.jpeg" style="width: 70px; height: 90px;"> -->
+                                     
                                 </td>
                                 <!-- <td>{{ $blog->slug }}</td> -->
                                 <td>{{ $blog->publish_date }}</td>
@@ -444,18 +445,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                        
-                            <!-- <div id="deleteModal-{{ $blog->id }}" class="modal" style="display:none;">
-                                    <div class="modal-content">
-                                        <p>Are you sure you want to delete this blog?</p>
-                                            <form id="deleteForm-{{ $blog->id }}" method="post" action="{{ route('blog.destroy', $blog)}}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                            <button type="button" class="btn btn-secondary close">Cancel</button>
-                                            </form>
-                                    </div>
-                                 </div> -->
+                    
                         </tbody>
                     </table>
                 </div>

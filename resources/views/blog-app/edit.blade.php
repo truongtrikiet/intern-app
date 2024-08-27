@@ -24,7 +24,7 @@
 
             <li class="nav-item dropdown language-dropdown">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="language-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="../src/assets/img/1x1/us.svg" class="flag-width" alt="flag">
+                    <img src="{{asset('src/assets/img/1x1/us.svg')}}" class="flag-width" alt="flag">
                 </a>
                 <div class="dropdown-menu position-absolute" aria-labelledby="language-dropdown">
                     <a class="dropdown-item d-flex" href="javascript:void(0);"><img src="../src/assets/img/1x1/us.svg" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;English</span></a>
@@ -129,7 +129,7 @@
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="avatar-container">
                         <div class="avatar avatar-sm avatar-indicators avatar-online">
-                            <img alt="avatar" src="../src/assets/img/profile-30.png" class="rounded-circle">
+                            <img alt="avatar" src="{{asset('src/assets/img/profile-30.png')}}" class="rounded-circle">
                         </div>
                     </div>
                 </a>
@@ -192,7 +192,7 @@
                 <div class="nav-logo">
                     <div class="nav-item theme-logo">
                         <a href={{asset('views.index')}}>
-                            <img src="../src/assets/img/logo.svg" class="navbar-logo" alt="logo">
+                            <img src="{{asset('src/assets/img/logo.svg')}}" class="navbar-logo" alt="logo">
                         </a>
                     </div>
                     <div class="nav-item theme-text">
@@ -209,7 +209,7 @@
             <div class="profile-info">
                 <div class="user-info">
                     <div class="profile-img">
-                        <img src="../src/assets/img/profile-30.png" alt="avatar">
+                        <img src="{{asset('src/assets/img/profile-30.png')}}" alt="avatar">
                     </div>
                     <div class="profile-content">
                         <h6 class="">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h6>
@@ -256,8 +256,8 @@
                         <!-- <li>
                             <a href={{url('/blog-app.post')}}> Post </a>
                         </li> -->
-                        <li  class="active">
-                            <a href={{url('/blog-app.create')}}> Create </a>
+                        <li>
+                            <a href={{url('/blog/create')}}> Create </a>
                         </li>
                         <!-- <li>
                             <a href={{url('/blog-app.edit')}}> Edit </a>
@@ -330,7 +330,7 @@
                     <div class="row mb-4">
                         <div class="col-sm-12">
                             <label>Title</label>
-                            <!-- <div id="blog-description"></div> -->
+                            <div id="blog-description"></div>
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -362,13 +362,13 @@
                         <div class="col-xxl-12 mb-4">
                             <textarea type="text" name="description" class="form-control" id="post-meta-title" placeholder="Description" required>{{ old('description', $blog->description) }}</textarea>
                         </div>
-                        <div class="col-xxl-12 mb-4">
-                            <h5 for="post-meta-description">Content</h5>
-                            <textarea id="editor" name="content" class="form-control" id="post-meta-description" cols="10" rows="5">{{ old('content', $blog->content) }}</textarea>
+                        <h5 for="post-meta-description">Content</h5>
+                        <div class="col-xxl-12 mb-4" id="editor-container" style="height: 300px;">
+                            <textarea type="text" name="content" class="form-control" cols="10" rows="10">{{ old('content', $blog->content) }}</textarea>
                         </div>
                     </div>
 
-                    <div class="col-xxl-12 col-md-12 mb-4">
+                    <!-- <div class="col-xxl-12 col-md-12 mb-4">
                         <label for="thumbnail">Thumbnail Image</label>
                         <div class="multiple-file-upload">
                             <input type="file" 
@@ -382,6 +382,12 @@
                                     @if ($blog->thumbnail)
                                         <img src="{{ $blog->getFirstMediaUrl('thumbnails') }}" alt="Thumbnail" class="img-thumbnail mt-2" style="max-width: 150px;">
                                     @endif 
+                        </div>
+                    </div> -->
+                    <div class="col-xxl-12 col-md-12 mb-4">
+                        <label for="thumbnail">Thumbnail Image</label>
+                        <div class="multiple-file-upload">
+                            <input type="file" name="thumbnail" class="form-control-file" value="{{ old('thumbnail') }}">
                         </div>
                     </div>
 
@@ -453,19 +459,20 @@
 
             
             <!--  BEGIN FOOTER  -->
-            <div class="footer-wrapper">
+            <!-- <div class="footer-wrapper">
                 <div class="footer-section f-section-1">
                     <p class="">Copyright © <span class="dynamic-year">2022</span> <a target="_blank" href="https://designreset.com/cork-admin/">DesignReset</a>, All rights reserved.</p>
                 </div>
                 <div class="footer-section f-section-2">
                     <p class="">Coded with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></p>
                 </div>
-            </div>
+            </div> -->
             <!--  END FOOTER  -->
+              
 
         </div>
         <!--  END CONTENT AREA  -->
     </div>
     <!-- END MAIN CONTAINER -->
     
-    
+    <!-- <script src={{asset('src/assets/js/quill/quill-edit.js')}}></script> -->

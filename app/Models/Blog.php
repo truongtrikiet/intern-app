@@ -36,7 +36,7 @@ class Blog extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('thumbnails')->singleFile()->useDisk('blogs');;
+        $this->addMediaCollection('thumbnail')->singleFile();
     }
 
     protected $casts = [

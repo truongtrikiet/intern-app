@@ -320,13 +320,14 @@
                     </div>
                 @endif
 
-        <form action="{{ route('blog.store') }}" method="post" enctype="multipart/form-data">
-            @csrf
+       
         <div class="row mb-4 layout-spacing layout-top-spacing">
 
             <div class="col-xxl-9 col-xl-12 col-lg-12 col-md-12 col-sm-12">
 
-           
+            <form action="{{ route('blog.store') }}" method="post" enctype="multipart/form-data">
+            @csrf
+
                 <div class="widget-content widget-content-area blog-create-section">
                     <div class="row mb-4">
                         <div class="col-sm-12">
@@ -336,7 +337,7 @@
                     </div>
                     <div class="row mb-4">
                         <div class="col-sm-12">
-                            <input type="text" name="title" class="form-control" id="post-title" placeholder="Post Title" value="{{ old('title') }}" required>
+                            <input type="text" name="title" class="form-control" placeholder="Post Title" id="post-title" maxlength="100" value="{{old('title')}}" required>
                         @error('title')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -348,15 +349,15 @@
                     <h5 class="mb-4">Description</h5>
                     <div class="row mb-4">
                         <div class="col-xxl-12 mb-4">
-                            <textarea type="text" name="description" class="form-control" id="blog-description" placeholder="Description" required>{{ old('description') }}</textarea>
+                            <textarea name="description" class="form-control" placeholder="Description" id="post-meta-title" maxlength="200" required>{{old('description')}}</textarea>
                         @error('description')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                         </div>
 
-                        <div class="col-xxl-12">
-                            <h5 for="post-meta-description">Content</h5>
-                            <textarea name="content" class="form-control" id="" cols="10" rows="5" placeholder="Content" >{{ old('content') }}</textarea>
+                        <h5 for="post-meta-description">Content</h5>
+                        <div class="col-xxl-12" id="editor-container" style="height: 300px;">
+                            <textarea name="content" class="form-control" cols="10" rows="10" >{{ old('content') }}</textarea>
                         @error('content')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -366,7 +367,10 @@
                     <div class="col-xxl-12 col-md-12 mb-4">
                         <label for="thumbnail">Thumbnail Image</label>
                         <div class="multiple-file-upload">
-                            <input type="file" name="thumbnail" id="thumbnail" class="form-control" value="{{ old('thumbnail') }}">
+                            <input type="file" name="thumbnail" id="thumbnail" class="form-control-file" value="{{old('thumbnail')}}">
+                            @error('thumbnail')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -375,9 +379,20 @@
                     </div>
                 </div>
 
+                <!-- @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif -->
+                </form>
+
             </div>         
         </div>
-        </form>
+
 
             <!-- <div class="col-xxl-3 col-xl-12 col-lg-12 col-md-12 col-sm-12 mt-xxl-0 mt-4">
                 <div class="widget-content widget-content-area blog-create-section">
@@ -421,4 +436,6 @@
     
 <!-- END MAIN CONTAINER -->
 </div> 
+
+<!-- <script src={{asset('src/assets/js/quill/quill.js')}}></script> -->
     

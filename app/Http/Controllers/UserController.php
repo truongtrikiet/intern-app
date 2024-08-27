@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeleteAllBlogRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
+use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,8 +30,8 @@ class UserController extends Controller
 
 
     //user delete all blogs
-    public function destroyAllBlogs(User $user) {
-        $user->blogs()->delete(); 
+    public function destroyAllBlogs() {
+        Blog::where('user_email', Auth::user()->email)->delete(); 
         
         return redirect()->route('blog.list')->with('success', 'All blogs has been deleted.');
     }

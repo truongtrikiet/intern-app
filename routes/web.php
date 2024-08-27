@@ -76,7 +76,7 @@ Route::middleware(['auth', 'admin'])->group(function(){
 Route::middleware(['auth'])->group(function(){
     Route::get('/profile/{email}', [UserController::class, 'profilePage'])->name('profile.page');
     Route::post('/profile/update', [UserController::class, 'profileUpdate'])->name('profile.update');
-    Route::delete('/delete-all-blogs', [UserController::class, 'destroyAllBlogs'])->name('delete.all.blogs');
+    Route::delete('/blog/delete-all', [UserController::class, 'destroyAllBlogs'])->name('delete.all.blogs');
 });
 
 //manage-page

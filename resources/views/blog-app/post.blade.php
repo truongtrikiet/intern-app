@@ -383,8 +383,12 @@
                 <h4>{{ $blog->title }}</h4>
                 <p class="mb-5">{{ $blog->description }}</p>
                 <!-- <hr class="my-5"> -->
-                <!-- <img src={{ $blog->getFirstMediaUrl('thumbnails') }} alt="" class="full-width img-fluid mt-4 mb-5"> -->
                 <img src="../src/assets/img/grid-blog-style-2.jpeg" class="img-fluid mt-4 mb-5" alt="...">
+                <!-- @if ($blog->hasMedia('thumbnail'))
+                    <img src="{{ $blog->getFirstMediaUrl('thumbnail') }}" alt="Thumbnail" style="width: 100px; height: auto;">
+                @else
+                    <p>No thumbnail available</p>
+                @endif -->
                 <div class="post-info">
                     <p class="mb-4">{{ $blog->content }}</p>
                 </div>

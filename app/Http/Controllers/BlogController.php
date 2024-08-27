@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Enums\BlogStatus;
 use App\Http\Requests\BlogUpdateRequest;
 use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\Models\Media;
 
 class BlogController extends Controller
 {
@@ -39,23 +40,21 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(BlogRequest $request, $blog)
+    public function store(BlogRequest $request)
     {
-        // dd($request->all());
         $blog = Blog::create([
             'user_email' => Auth::user()->email,
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-            'description' => $request->input('description'),
-            'slug' => Str::slug($request->input('title')),
-            'publish_date' => $request->input('publish_date', now()),
+            'title' => $request->title,
+            'content' => $request->content,
+            'description' => $request->description,
+            'slug' => Str::slug($request->title),
+            'publish_date' => $request->publish_date ?? now(),
             'status_blog' => BlogStatus::Waiting,
         ]);
 
-        if ($request->hasFile('thumbnail')) {
-            $blog->addMediaFromRequest('thumbnail')
-                 ->toMediaCollection('thumbnail');
-        }
+        $blog->addMediaFromRequest('thumbnail')
+            // ->usingName($blog->slug)
+            ->toMediaCollection();
         
         return redirect()->route('blog.index')->with('success', 'Blog created successfully.');
     }
@@ -93,19 +92,26 @@ class BlogController extends Controller
     public function update(BlogUpdateRequest $request, Blog $blog, $id)
     {
         $blog = Blog::find($id);
-        $blog->user_email = Auth::user()->email;
-        $blog->title = $request->input('title');
-        $blog->slug = Str::slug($request->input('title'));
-        $blog->description = $request->input('description');
-        $blog->content = $request->input('content');
+        $blog->update([
+            'user_email' => Auth::user()->email,
+            'title' => $request->input('title'),
+            'slug' => Str::slug($request->input('title')),
+            'description' => $request->input('description'),
+            'content' => $request->input('content'),
+        ]);
+        // $blog->update($request->validated());
 
-        if($request->hasFile('thumbnail')) {
-            // $blog->clearMediaConllection('thumbnail');
-            $blog->addMediat($request->file('thumbnail'))
-            ->toMediaCollection('thumbnail');
+        if ($blog->status_blog === BlogStatus::NewBlog) {
+            $blog->status_blog = BlogStatus::UpdateBlog;
+            $blog->save();
         }
 
-        $blog->save();
+        if($request->hasFile('thumbnail')) {
+            // $blog->clearMediaCollection('thumbnail');
+            $blog->addMediaFromRequest('thumbnail')
+            ->usingName($blog->slug)
+            ->toMediaCollection();
+        }
         
         return redirect()->route('blog.edit', $blog->id)->with('success', 'Blog was updated.');
         
@@ -116,7 +122,9 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
+        $blog->clearMediaCollection('thumbnail');
         $blog->delete();
+
         return redirect()->route('blog.index')->with('success', 'Blog was deleted.');
     }
 }

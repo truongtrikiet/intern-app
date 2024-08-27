@@ -22,7 +22,7 @@ class BlogFactory extends Factory
     {
         $title = $this->faker->sentence;
         return [
-            'user_email' => 'demotest@gmail.com',
+            'user_email' => 'jaden@gmail.com',
             'title' => $title,
             'slug' => Str::slug($title),
             'description' => $this->faker->text,
